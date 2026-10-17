@@ -2,6 +2,9 @@
 Assests/
 PROMPT.txt
 /doraemon-sms.mp3
+*.jpeg
+doraemon_nostalgia_thumbnail.jpg
+743777357*.jpg
 
 # Videos and Recordings (never pushed to git)
 *.mp4

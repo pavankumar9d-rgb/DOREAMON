@@ -36,10 +36,13 @@ html {
   font-family: var(--font-comic);
   color: var(--ink-black);
   background-color: var(--dora-cream);
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
   overflow-x: hidden;
+  width: 100%;
   position: relative;
   line-height: 1.5;
   background-color: var(--dora-cream);
@@ -590,10 +593,10 @@ h1, h2, h3, h4, .comic-title {
    ========================================================================== */
 .marquee-ribbon-container {
   position: relative;
-  width: 105vw;
-  left: -2.5vw;
+  width: 100%;
+  max-width: 100vw;
   margin: 30px 0 50px;
-  transform: rotate(-1.8deg);
+  transform: rotate(-1.5deg);
   background-color: var(--dora-collar-red);
   border-top: var(--border-thick);
   border-bottom: var(--border-thick);
@@ -2085,7 +2088,13 @@ h1, h2, h3, h4, .comic-title {
   }
 }
 
-/* Responsive Media Queries */
+/* ==========================================================================
+   Mobile Quick-Nav Strip & Multi-Device Responsive System
+   ========================================================================== */
+.mobile-subnav {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .hero-content-grid,
   .family-layout-grid,
@@ -2094,16 +2103,528 @@ h1, h2, h3, h4, .comic-title {
   .delivery-layout-grid,
   .footer-content-grid {
     grid-template-columns: 1fr;
+    gap: 32px;
   }
 
   .polaroid-grid {
     grid-template-columns: 1fr;
-    max-width: 400px;
+    max-width: 440px;
     margin: 20px auto 0;
   }
 
   .nav-links {
     display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Navbar */
+  .site-navbar {
+    padding: 10px 14px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .nav-brand {
+    gap: 6px;
+  }
+
+  .nav-logo-bell {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav-brand-title {
+    font-size: 1.15rem;
+  }
+
+  .nav-brand-sub {
+    font-size: 0.72rem;
+    padding: 1px 6px;
+  }
+
+  .nav-actions {
+    gap: 8px;
+  }
+
+  .btn-audio-toggle {
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    border-radius: 16px;
+  }
+
+  .btn-cta-pill {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    border-radius: 18px;
+  }
+
+  /* Mobile Horizontal Quick-Nav Scroll Strip */
+  .mobile-subnav {
+    display: block;
+    position: sticky;
+    top: 55px;
+    z-index: 998;
+    background: rgba(253, 248, 236, 0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: var(--border-medium);
+    padding: 6px 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  .mobile-subnav-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    white-space: nowrap;
+    padding: 2px 0;
+  }
+
+  .mobile-subnav-scroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mobile-subnav-pill {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    background: white;
+    color: var(--ink-black);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 16px;
+    border: 2px solid var(--ink-black);
+    box-shadow: 2px 2px 0 var(--ink-black);
+    transition: all 0.15s ease;
+  }
+
+  .mobile-subnav-pill:active,
+  .mobile-subnav-pill:hover {
+    background: var(--dora-bell-gold);
+    transform: translateY(-1px);
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 24px 14px 44px;
+    min-height: auto;
+  }
+
+  .hero-splash-header {
+    margin-bottom: 18px;
+  }
+
+  .hero-eyebrow {
+    font-size: 1rem;
+  }
+
+  .hero-main-title {
+    font-size: clamp(2.4rem, 11vw, 3.8rem);
+    text-shadow: 4px 4px 0 var(--ink-black);
+    -webkit-text-stroke: 1.5px var(--ink-black);
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .hero-drawer-prompt {
+    font-size: 0.82rem;
+    padding: 4px 10px;
+    border-radius: 12px;
+    max-width: 94%;
+  }
+
+  .hero-content-grid {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 24px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-rig-stage {
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+  }
+
+  .rig-speech-bubble {
+    right: 4px;
+    top: -12px;
+    font-size: 0.88rem;
+    padding: 4px 10px;
+    border-radius: 14px;
+    border: 2px solid var(--ink-black);
+    box-shadow: 2px 2px 0 var(--ink-black);
+  }
+
+  .hero-copy-card {
+    width: 100%;
+    max-width: 380px;
+    padding: 20px 16px;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: var(--comic-shadow);
+  }
+
+  .hero-copy-title {
+    font-size: 1.6rem;
+  }
+
+  .hero-copy-desc {
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+
+  .hero-button-group {
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-replay {
+    width: 100%;
+    justify-content: center;
+    padding: 10px 18px;
+    font-size: 0.92rem;
+  }
+
+  .rig-slider-container {
+    width: 100%;
+    max-width: 330px;
+    margin: 16px auto 0;
+    padding: 10px 12px;
+  }
+
+  /* Nobi Family Residence */
+  .nobi-residence-section {
+    padding: 40px 14px;
+  }
+
+  .section-header {
+    margin-bottom: 22px;
+  }
+
+  .section-title {
+    font-size: clamp(1.8rem, 7vw, 2.6rem);
+  }
+
+  .section-desc {
+    font-size: 0.92rem;
+  }
+
+  .family-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding: 4px 2px 10px;
+    margin-bottom: 16px;
+    scrollbar-width: none;
+  }
+
+  .family-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .family-tab-btn {
+    flex-shrink: 0;
+    padding: 8px 14px;
+    font-size: 0.85rem;
+  }
+
+  .family-portrait-container {
+    border-radius: 18px;
+    margin-bottom: 16px;
+    max-height: 270px;
+  }
+
+  .family-detail-card {
+    padding: 20px 16px;
+    border-radius: 20px;
+    box-shadow: var(--comic-shadow);
+  }
+
+  .family-character-name {
+    font-size: 1.5rem;
+  }
+
+  .family-character-role {
+    font-size: 0.82rem;
+  }
+
+  .family-character-bio {
+    font-size: 0.9rem;
+  }
+
+  .family-traits-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .btn-family-action {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px;
+    font-size: 0.92rem;
+  }
+
+  /* Empty Lot Gang */
+  .empty-lot-section {
+    padding: 40px 14px;
+  }
+
+  .empty-lot-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .kid-card {
+    padding: 12px;
+    border-radius: 18px;
+    box-shadow: var(--comic-shadow-sm);
+  }
+
+  .kid-card-img-container {
+    height: 140px;
+    margin-bottom: 8px;
+  }
+
+  .kid-card-name {
+    font-size: 1.1rem;
+  }
+
+  .kid-card-role {
+    font-size: 0.75rem;
+  }
+
+  .kid-card-reaction {
+    font-size: 0.78rem;
+    padding: 6px 8px;
+  }
+
+  /* Air Cannon Gadget Simulator */
+  .cannon-section {
+    padding: 40px 14px;
+  }
+
+  .cannon-stage-container {
+    height: 240px;
+    max-width: 100%;
+    border-radius: 20px;
+  }
+
+  .cannon-dokan-badge {
+    font-size: clamp(2.2rem, 10vw, 3.2rem);
+    padding: 10px 20px;
+  }
+
+  .cannon-control-card {
+    padding: 20px 16px;
+    border-radius: 20px;
+    box-shadow: var(--comic-shadow);
+  }
+
+  .cannon-trigger-btn {
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 1.05rem;
+    justify-content: center;
+  }
+
+  /* Neighborhood Polaroids */
+  .polaroids-section {
+    padding: 40px 14px;
+  }
+
+  .polaroid-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
+    gap: 24px;
+  }
+
+  .polaroid-card {
+    width: 100%;
+    height: 380px;
+  }
+
+  /* Anywhere Door Delivery */
+  .delivery-section {
+    padding: 40px 14px;
+  }
+
+  .delivery-stage-container {
+    height: 260px;
+    border-radius: 20px;
+  }
+
+  .delivery-control-card {
+    padding: 20px 16px;
+    border-radius: 20px;
+    box-shadow: var(--comic-shadow);
+  }
+
+  .recipient-pills {
+    gap: 6px;
+  }
+
+  .recipient-pill {
+    padding: 6px 12px;
+    font-size: 0.82rem;
+  }
+
+  .btn-delivery-start {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 22nd Century Club Form & Footer */
+  .club-section {
+    padding: 40px 14px;
+  }
+
+  .club-card {
+    padding: 24px 16px;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 100%;
+    box-shadow: var(--comic-shadow);
+  }
+
+  .club-input-group input,
+  .club-input-group select {
+    font-size: 16px; /* Prevents iOS auto-zoom on input focus */
+    padding: 10px 14px;
+  }
+
+  .site-footer {
+    padding: 40px 14px 100px;
+  }
+
+  .footer-content-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .footer-brand {
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Bottom Floating Controls: Narrator Pill & Mini-Dora Mascot */
+  .narrator-pill-container {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    right: 74px;
+    transform: none;
+    width: auto;
+    max-width: calc(100% - 86px);
+    z-index: 999;
+  }
+
+  .narrator-pill {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 0.8rem;
+    gap: 8px;
+    box-shadow: 2px 2px 0 var(--ink-black);
+    border: 2px solid var(--ink-black);
+  }
+
+  .narrator-icon {
+    font-size: 1.1rem;
+  }
+
+  .footer-mini-dora-container {
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+  }
+
+  .footer-mini-dora {
+    width: 52px;
+    height: 52px;
+    box-shadow: 2px 2px 0 var(--ink-black);
+    border: 2px solid var(--ink-black);
+  }
+
+  .mini-dora-bubble {
+    top: -30px;
+    right: 4px;
+    font-size: 0.72rem;
+    padding: 2px 8px;
+  }
+
+  /* Opening Preloader on Mobile */
+  .dora-preloader-card {
+    padding: 26px 18px;
+    width: 92%;
+    max-width: 360px;
+    border-radius: 22px;
+    box-shadow: 6px 6px 0 var(--ink-black);
+  }
+
+  .dora-preloader-bell-ring {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 10px;
+  }
+
+  .preloader-title {
+    font-size: 1.75rem;
+  }
+
+  .preloader-sub {
+    font-size: 0.95rem;
+  }
+
+  .preloader-desc {
+    font-size: 0.82rem;
+    margin: 6px 0 16px;
+  }
+
+  .preloader-enter-btn {
+    padding: 12px 18px;
+    font-size: 1rem;
+    border-radius: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .site-navbar {
+    padding: 8px 10px;
+  }
+
+  .nav-brand-title {
+    font-size: 1rem;
+  }
+
+  .nav-brand-sub {
+    display: none;
+  }
+
+  .btn-cta-pill span:first-child {
+    display: none;
+  }
+
+  .empty-lot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-main-title {
+    font-size: 2.2rem;
   }
 }
 

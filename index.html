@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doraemon ドラえもん — 22nd Century Childhood Memory Walkthrough</title>
+  <meta name="description" content="Interactive 60fps tribute to Doraemon, Fujiko F. Fujio's iconic robot cat. Features 4-stage paper tear rig, signature family moves, Air Cannon simulator, and Anywhere Door dorayaki delivery.">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- Tactile Paper Grain SVG Noise Overlay (Zero external network requests) -->
+  <svg class="paper-grain-overlay" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <filter id="paper-noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch" />
+      <feColorMatrix type="matrix" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0" />
+    </filter>
+    <rect width="100%" height="100%" filter="url(#paper-noise)" />
+  </svg>
+
+  <!-- Sticky Top Comic Navbar -->
+  <header class="site-navbar">
+    <a href="#hero-section" class="nav-brand">
+      <svg id="nav-logo-bell" class="nav-logo-bell" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" title="Click to ring collar bell!">
+        <circle cx="16" cy="18" r="12" fill="#FFD700" stroke="#1C1917" stroke-width="2.5" />
+        <rect x="7" y="14" width="18" height="3" rx="1.5" fill="#E60012" stroke="#1C1917" stroke-width="1.5" />
+        <circle cx="16" cy="21" r="2.5" fill="#1C1917" />
+        <line x1="16" y1="23.5" x2="16" y2="28" stroke="#1C1917" stroke-width="2" />
+        <circle cx="16" cy="6" r="3" fill="#D4AF37" stroke="#1C1917" stroke-width="1.5" />
+      </svg>
+      <div>
+        <span class="nav-brand-title">Doraemon</span>
+        <span class="nav-brand-sub">ドラえもん</span>
+      </div>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#nobi-residence" class="nav-link">Nobi Family</a></li>
+        <li><a href="#empty-lot" class="nav-link">Empty Lot</a></li>
+        <li><a href="#air-cannon" class="nav-link">Air Cannon</a></li>
+        <li><a href="#polaroids" class="nav-link">Neighborhood</a></li>
+        <li><a href="#anywhere-door" class="nav-link">Anywhere Door</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav-actions">
+      <button id="audio-toggle-btn" class="btn-audio-toggle" type="button" aria-label="Toggle Anime Sound Effects">
+        🔊 Sound ON
+      </button>
+      <a href="#club-section" class="btn-cta-pill">
+        <span>Join 22nd Century</span>
+        <span>🚀</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Walkthrough Narrator Pill (Bottom Fixed) -->
+  <aside class="narrator-pill-container" aria-live="polite">
+    <div id="narrator-pill" class="narrator-pill">
+      <span id="narrator-pill-icon" class="narrator-icon">✂️</span>
+      <span id="narrator-pill-text">He tears through the desk drawer...</span>
+    </div>
+  </aside>
+
+  <main>
+    <!-- Section B: Hero Section (4-Stage Paper-Tear & Multi-Layer Interactive Rig) -->
+    <section id="hero-section" class="hero-section">
+      <div class="hero-splash-header">
+        <p class="hero-eyebrow">~ a childhood memory walkthrough ~</p>
+        <h1 class="hero-main-title">DORAEMON</h1>
+        <p class="hero-subtitle">Interactive 22nd Century Tribute</p>
+        <div class="hero-drawer-prompt">
+          <span id="stage-prompt-text">psst... something is rattling inside Nobita's desk drawer...</span>
+        </div>
+      </div>
+
+      <div class="hero-content-grid">
+        <!-- Left Hero Copy Card (Fades in at Stage 3) -->
+        <div class="hero-copy-card">
+          <div class="hero-copy-badge">
+            <span>🔔</span>
+            <span>Matsubara's favorite robot cat</span>
+          </div>
+          <h2 class="hero-copy-title comic-title">Yaa! It's Doraemon.</h2>
+          <p class="hero-copy-desc">
+            22nd-century caretaker, Dorayaki connoisseur, and guardian of Nobita's afternoon naps. He just tore straight through the blue construction paper to say hi!
+          </p>
+          <div class="hero-button-group">
+            <a href="#nobi-residence" class="btn-hero-primary">
+              <span>Meet the Nobi family</span>
+              <span>↓</span>
+            </a>
+            <button id="replay-tear-btn" class="btn-hero-replay" type="button">
+              <span>↻ Replay paper tear</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Rig Stage (4 Stages) -->
+        <div id="hero-rig-container" class="hero-rig-stage" data-stage="0">
+          <!-- Stage 0: Rattling Desk Drawer -->
+          <div class="rig-stage-view" data-stage-id="0">
+            <div class="rattle-box">
+              <div class="rattle-drawer-icon">🗄️</div>
+              <p><strong>Nobita's Desk Drawer</strong></p>
+              <small style="color: #78716C;">Time Machine incoming...</small>
+            </div>
+          </div>
+
+          <!-- Stage 1: Slit Glowing Paper Tear -->
+          <div class="rig-stage-view" data-stage-id="1">
+            <img class="paper-tear-stage-img" src="assets/Paper_tear_with_glowing_slit_20261017095845.jpg" alt="Paper tear glowing slit" onerror="handleAssetError(this, 'Paper_tear_with_glowing_slit_20261017095845.jpg')">
+          </div>
+
+          <!-- Stage 2: Peeking Eyes & Paws -->
+          <div class="rig-stage-view" data-stage-id="2">
+            <img class="paper-tear-stage-img" src="assets/Character_peeking_through_torn_p._20261017095845.jpg" alt="Doraemon peeking through paper" onerror="handleAssetError(this, 'Character_peeking_through_torn_p._20261017095845.jpg')">
+          </div>
+
+          <!-- Stage 3/4: Full Interactive Multi-Layer Rig -->
+          <div class="rig-stage-view" data-stage-id="3">
+            <div class="rig-layer-container">
+              <!-- Comic speech bubble -->
+              <div class="rig-speech-bubble">"Boku Doraemon!"</div>
+
+              <!-- Layer 1: Torn Paper Frame Overlay -->
+              <div class="rig-layer rig-layer-frame">
+                <img src="assets/Torn_paper_opening_frame_20261017095845.jpg" alt="Torn paper frame" onerror="handleAssetError(this, 'Torn_paper_opening_frame_20261017095845.jpg')">
+              </div>
+
+              <!-- Layer 2: Torso Base Sprite -->
+              <div class="rig-layer rig-layer-torso">
+                <img id="rig-torso-img" src="assets/Anime_character_sprite_layer_design_20261017095845.jpg" alt="Doraemon Torso Sprite" onerror="handleAssetError(this, 'Anime_character_sprite_layer_design_20261017095845.jpg')">
+              </div>
+
+              <!-- Layer 3: Dynamic Eye Pupils Sprite -->
+              <div id="rig-layer-eyes" class="rig-layer rig-layer-eyes">
+                <img id="rig-eyes-img" src="assets/Anime_eyes_for_animation_20261017095845.jpg" alt="Doraemon Eyes" onerror="handleAssetError(this, 'Anime_eyes_for_animation_20261017095845.jpg')">
+              </div>
+
+              <!-- Layer 4: Cheerful Waving Arm Sprite -->
+              <div id="rig-layer-arm" class="rig-layer rig-layer-arm">
+                <img id="rig-arm-img" src="assets/Character_waving_arm_sprite_layer_20261017095845.jpg" alt="Waving Arm Sprite" onerror="handleAssetError(this, 'Character_waving_arm_sprite_layer_20261017095845.jpg')">
+              </div>
+
+              <!-- Layer 5: Pendulum Golden Collar Bell -->
+              <div id="rig-layer-bell" class="rig-layer rig-layer-bell" title="Click to ring bell!">
+                <img id="rig-bell-img" src="assets/Doraemon_golden_collar_bell_sprite_20261017095845.jpg" alt="Golden Collar Bell" onerror="handleAssetError(this, 'Doraemon_golden_collar_bell_sprite_20261017095845.jpg')">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section C: Diagonal Collar-Red Marquee Ribbon -->
+    <div class="marquee-ribbon-container" aria-hidden="true">
+      <div class="marquee-content">
+        <span><strong class="marquee-star">✦</strong> 22nd Century Department Store</span>
+        <span><strong class="marquee-star">✦</strong> Dorayaki</span>
+        <span><strong class="marquee-star">✦</strong> Anywhere Door</span>
+        <span><strong class="marquee-star">✦</strong> Take-copter</span>
+        <span><strong class="marquee-star">✦</strong> Nobita's Desk Drawer</span>
+        <span><strong class="marquee-star">✦</strong> Memory Bread</span>
+        <span><strong class="marquee-star">✦</strong> Empty Lot Pipes</span>
+        <span><strong class="marquee-star">✦</strong> Air Cannon</span>
+        <!-- Duplicate for infinite seamless scroll -->
+        <span><strong class="marquee-star">✦</strong> 22nd Century Department Store</span>
+        <span><strong class="marquee-star">✦</strong> Dorayaki</span>
+        <span><strong class="marquee-star">✦</strong> Anywhere Door</span>
+        <span><strong class="marquee-star">✦</strong> Take-copter</span>
+        <span><strong class="marquee-star">✦</strong> Nobita's Desk Drawer</span>
+        <span><strong class="marquee-star">✦</strong> Memory Bread</span>
+        <span><strong class="marquee-star">✦</strong> Empty Lot Pipes</span>
+        <span><strong class="marquee-star">✦</strong> Air Cannon</span>
+      </div>
+    </div>
+
+    <!-- Section D: The Nobi Residence (Family Portrait & Signature Moves) -->
+    <section id="nobi-residence" class="nobi-residence-section">
+      <div class="section-wrapper">
+        <div class="section-header">
+          <span class="section-badge">Showa 50s Living Room</span>
+          <h2 class="section-title comic-title">The Nobi Residence</h2>
+          <p class="section-subtitle">
+            Every family member in the 3-chome house has a signature move. Click their tabs to inspect their bios, and trigger their moves on the tatami!
+          </p>
+        </div>
+
+        <div class="family-layout-grid">
+          <!-- Left Tatami Frame Wrapper with Action Overlay -->
+          <div id="tatami-frame-wrapper" class="tatami-frame-wrapper">
+            <img class="tatami-main-img" src="assets/Family_posing_together_on_tatami_20261017095845.jpg" alt="Nobi family posing together on tatami" onerror="handleAssetError(this, 'Family_posing_together_on_tatami_20261017095845.jpg')">
+
+            <!-- Theatrical Character Spotlight Layers (Dims others, illuminates active character) -->
+            <div id="tatami-spotlight-dimmer" class="tatami-spotlight-dimmer" aria-hidden="true"></div>
+            <div id="tatami-spotlight-beam" class="tatami-spotlight-beam" aria-hidden="true"></div>
+            <div id="tatami-spotlight-badge" class="tatami-spotlight-badge" aria-hidden="true">
+              <span id="tatami-spotlight-badge-text">Doraemon ドラえもん</span>
+            </div>
+
+            <!-- Direct Click Hotspots on Characters -->
+            <div class="tatami-hotspots-container">
+              <button type="button" class="tatami-hotspot" data-family-idx="0" style="left: 17%; top: 46%; width: 27%; height: 50%;" title="Spotlight Doraemon" aria-label="Select Doraemon"></button>
+              <button type="button" class="tatami-hotspot" data-family-idx="1" style="left: 41%; top: 22%; width: 19%; height: 68%;" title="Spotlight Nobita" aria-label="Select Nobita"></button>
+              <button type="button" class="tatami-hotspot" data-family-idx="2" style="left: 28%; top: 12%; width: 21%; height: 52%;" title="Spotlight Tamako (Mom)" aria-label="Select Tamako"></button>
+              <button type="button" class="tatami-hotspot" data-family-idx="3" style="left: 54%; top: 13%; width: 25%; height: 55%;" title="Spotlight Nobisuke (Dad)" aria-label="Select Nobisuke"></button>
+              <button type="button" class="tatami-hotspot" data-family-idx="4" style="left: 58%; top: 46%; width: 26%; height: 50%;" title="Spotlight Dorami" aria-label="Select Dorami"></button>
+            </div>
+
+            <!-- Reaction Move Overlay Stage -->
+            <div id="family-action-overlay-stage" class="family-action-overlay-stage">
+              <img id="family-action-overlay-img" src="assets/Doraemon_holding_giant_golden_pa._20261017095845.jpg" alt="Family signature move visual" onerror="handleAssetError(this, 'Doraemon_holding_giant_golden_pa._20261017095845.jpg')">
+            </div>
+
+            <!-- Speech Bubble Pop -->
+            <div id="family-move-bubble" class="family-move-speech-bubble">
+              "Bean-paste perfection!"
+            </div>
+          </div>
+
+          <!-- Right Bio Column & Tabs -->
+          <div class="family-bio-column">
+            <!-- 5 Pill Tabs -->
+            <div class="family-tabs-nav" role="tablist">
+              <button class="family-tab-btn active" role="tab" type="button">Doraemon</button>
+              <button class="family-tab-btn" role="tab" type="button">Nobita</button>
+              <button class="family-tab-btn" role="tab" type="button">Tamako (Mom)</button>
+              <button class="family-tab-btn" role="tab" type="button">Nobisuke (Dad)</button>
+              <button class="family-tab-btn" role="tab" type="button">Dorami</button>
+            </div>
+
+            <!-- Dynamic Character Bio Card -->
+            <div class="family-bio-card">
+              <div id="family-bio-kanji" class="family-bio-watermark">ドラえもん</div>
+              <div class="family-bio-header">
+                <h3 id="family-bio-name" class="family-bio-name comic-title">Doraemon</h3>
+                <span id="family-bio-role" class="family-bio-role">Factory MS-903 • 22nd Century Guardian</span>
+              </div>
+              <p id="family-bio-desc" class="family-bio-desc">
+                Manufactured on September 3, 2112 at Matsushiba Robot Factory. Earless, blue, and terrified of mice. Possesses a 4-dimensional pocket housing thousands of secret gadgets.
+              </p>
+              <div class="family-bio-traits">
+                <div class="trait-box">
+                  <strong>Favorite:</strong>
+                  <span id="family-bio-fav">Dorayaki (Red bean pancake)</span>
+                </div>
+                <div class="trait-box">
+                  <strong>Weakness:</strong>
+                  <span id="family-bio-weak">Mice & cold winters</span>
+                </div>
+              </div>
+              <button id="family-move-trigger" class="btn-signature-move" type="button">
+                🥞 Summon Giant Dorayaki
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section E: The Empty Lot Gang (Akichi Poke Cards) -->
+    <section id="empty-lot" class="empty-lot-section">
+      <div class="section-wrapper">
+        <div class="section-header">
+          <span class="section-badge">Akichi Playground</span>
+          <h2 class="section-title comic-title">The Empty Lot Gang</h2>
+          <p class="section-subtitle">
+            Three concrete pipes, one dusty dirt clearing, and endless childhood adventures. Point at a friend and poke their card to trigger their reaction!
+          </p>
+        </div>
+
+        <div class="empty-lot-layout">
+          <!-- Left Feature Card: Laughing on Pipes Scene -->
+          <div class="empty-lot-feature-card">
+            <div class="empty-lot-pipes-img-wrapper">
+              <img class="empty-lot-pipes-img" src="assets/Doraemon_characters_laughing_tog._20261017095845.jpg" alt="Doraemon gang laughing together on pipes" onerror="handleAssetError(this, 'Doraemon_characters_laughing_tog._20261017095845.jpg')">
+              <div id="empty-lot-feature-bubble" class="feature-speech-bubble">
+                "Poke any card on the right to hear from the gang!"
+              </div>
+            </div>
+            <div class="empty-lot-feature-content">
+              <h3 class="comic-title">Unstoppable.</h3>
+              <p>
+                Until Gian announces an impromptu 3-hour solo vocal concert on top of the concrete pipes...
+              </p>
+            </div>
+          </div>
+
+          <!-- Right 2x2 Grid of Kid Poke Cards -->
+          <div id="empty-lot-grid" class="empty-lot-grid">
+            <!-- Shizuka -->
+            <div class="poke-kid-card" data-char="shizuka">
+              <div class="poke-kid-img-wrapper">
+                <img src="assets/Girl_holding_sweet_potato_20261017095845.jpg" alt="Shizuka Minamoto" onerror="handleAssetError(this, 'Girl_holding_sweet_potato_20261017095845.jpg')">
+              </div>
+              <span class="poke-kid-badge">YAKI-IMO! 🍠</span>
+              <h4 class="poke-kid-name">Shizuka Minamoto</h4>
+              <p class="poke-kid-trait">Sweet Potato Connoisseur</p>
+            </div>
+
+            <!-- Gian -->
+            <div class="poke-kid-card" data-char="gian">
+              <div class="poke-kid-img-wrapper">
+                <img src="assets/Character_singing_into_microphone_20261017095845.jpg" alt="Takeshi Gian Gouda" onerror="handleAssetError(this, 'Character_singing_into_microphone_20261017095845.jpg')">
+              </div>
+              <span class="poke-kid-badge" style="background:#FF6B9D; color:#FFF;">BOE~!! 🎤</span>
+              <h4 class="poke-kid-name">Takeshi 'Gian' Gouda</h4>
+              <p class="poke-kid-trait">Empty Lot Vocal Tyrant</p>
+            </div>
+
+            <!-- Suneo -->
+            <div class="poke-kid-card" data-char="suneo">
+              <div class="poke-kid-img-wrapper">
+                <img src="assets/Suneo_holding_toy_airplane_20261017095845.jpg" alt="Suneo Honekawa" onerror="handleAssetError(this, 'Suneo_holding_toy_airplane_20261017095845.jpg')">
+              </div>
+              <span class="poke-kid-badge">VIP RC JET! ✈️</span>
+              <h4 class="poke-kid-name">Suneo Honekawa</h4>
+              <p class="poke-kid-trait">RC Aircraft Collector</p>
+            </div>
+
+            <!-- Dekisugi -->
+            <div class="poke-kid-card" data-char="dekisugi">
+              <div class="poke-kid-img-wrapper">
+                <img src="assets/Boy_holding_encyclopedia_pointin._20261017095845.jpg" alt="Hidetoshi Dekisugi" onerror="handleAssetError(this, 'Boy_holding_encyclopedia_pointin._20261017095845.jpg')">
+              </div>
+              <span class="poke-kid-badge">100 PTS! ✨</span>
+              <h4 class="poke-kid-name">Hidetoshi Dekisugi</h4>
+              <p class="poke-kid-trait">Honor Student & Astronomer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section F: Gadget Showcase (Hold to Charge Air Cannon) -->
+    <section id="air-cannon" class="air-cannon-section">
+      <!-- Rotating Sunburst Background -->
+      <div id="cannon-sunburst-bg" class="cannon-sunburst-bg"></div>
+
+      <div class="cannon-layout-grid">
+        <!-- Left Copy & Hold Engine -->
+        <div class="cannon-copy-card">
+          <span class="cannon-eyebrow">4D Pocket Heavy Artillery</span>
+          <h2 class="cannon-title comic-title">The Air Cannon</h2>
+          <p class="cannon-desc">
+            Doraemon's iconic silver arm-cannon from the big-screen theatrical adventures. Hold the button to compress atmospheric pressure, and release at maximum charge to fire a shockwave!
+          </p>
+
+          <div class="cannon-charge-bar-track">
+            <div id="cannon-charge-fill" class="cannon-charge-fill"></div>
+          </div>
+
+          <button id="air-cannon-trigger" class="btn-cannon-hold" type="button">
+            ⚡ Hold to pressurize Air Cannon
+          </button>
+
+          <div class="cannon-blast-counter">
+            Blasts fired: <strong id="blast-count-number">0</strong>
+          </div>
+        </div>
+
+        <!-- Right Stage: Heroic Pose + Canvas Energy Core -->
+        <div class="cannon-stage-wrapper">
+          <img class="cannon-pose-img" src="assets/Doraemon_and_Nobita_posing_heroi._20261017095845.jpg" alt="Doraemon and Nobita Air Cannon Heroic Pose" onerror="handleAssetError(this, 'Doraemon_and_Nobita_posing_heroi._20261017095845.jpg')">
+
+          <!-- Canvas for swirling energy particles & shockwaves -->
+          <canvas id="cannon-energy-canvas" class="cannon-energy-canvas" width="200" height="200"></canvas>
+
+          <!-- DOKAN Comic Explosion Burst Badge -->
+          <div id="cannon-dokan-badge" class="cannon-dokan-badge">
+            DOKAN!! ドカン!
+          </div>
+
+          <!-- Screen Flash -->
+          <div id="cannon-blast-flash" class="cannon-blast-flash"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section G: Neighborhood Legends (3D Flip Polaroids) -->
+    <section id="polaroids" class="neighborhood-section">
+      <div class="section-wrapper">
+        <div class="section-header">
+          <span class="section-badge">Memories of Matsubara</span>
+          <h2 class="section-title comic-title">Neighborhood Legends</h2>
+          <p class="section-subtitle">
+            The grown-ups who kept an eye on the neighborhood. Click each vintage Polaroid to flip it and read the authentic handwritten notes on the back!
+          </p>
+        </div>
+
+        <div class="polaroid-grid">
+          <!-- Polaroid 1: Sensei -->
+          <div class="polaroid-card" style="transform: rotate(-2.5deg);">
+            <!-- Front -->
+            <div class="polaroid-face polaroid-front">
+              <div class="polaroid-tape"></div>
+              <div class="polaroid-photo-frame">
+                <img src="assets/Teacher_holding_chalk_and_roster_20261017095845.jpg" alt="Sensei holding chalk and roster" onerror="handleAssetError(this, 'Teacher_holding_chalk_and_roster_20261017095845.jpg')">
+              </div>
+              <div class="polaroid-caption">
+                <h4>Sensei (The Teacher)</h4>
+                <p>Classroom Roster Master</p>
+                <span class="polaroid-flip-hint">Click to flip 🔄</span>
+              </div>
+            </div>
+            <!-- Back -->
+            <div class="polaroid-face polaroid-back">
+              <p class="polaroid-handwriting">
+                "Scolds me every single Tuesday for daydreaming and napping in class, but stayed late in the pouring rain to make sure I got home safe. — Nobita"
+              </p>
+              <span class="polaroid-postmark">Elementary Grade 4</span>
+            </div>
+          </div>
+
+          <!-- Polaroid 2: Kaminari-san -->
+          <div class="polaroid-card" style="transform: rotate(2deg);">
+            <!-- Front -->
+            <div class="polaroid-face polaroid-front">
+              <div class="polaroid-tape"></div>
+              <div class="polaroid-photo-frame">
+                <img src="assets/Man_holding_bonsai_tree_20261017095845.jpg" alt="Mr. Kaminari holding bonsai tree" onerror="handleAssetError(this, 'Man_holding_bonsai_tree_20261017095845.jpg')">
+              </div>
+              <div class="polaroid-caption">
+                <h4>Mr. Kaminari</h4>
+                <p>Corner Bonsai Defender</p>
+                <span class="polaroid-flip-hint">Click to flip 🔄</span>
+              </div>
+            </div>
+            <!-- Back -->
+            <div class="polaroid-face polaroid-back">
+              <p class="polaroid-handwriting">
+                "Total window & prized bonsai casualties this month: 14 baseballs. Always keep an Anywhere Door ready on standby before Nobita takes his batting stance! — Doraemon"
+              </p>
+              <span class="polaroid-postmark">Corner House #4</span>
+            </div>
+          </div>
+
+          <!-- Polaroid 3: Jaiko -->
+          <div class="polaroid-card" style="transform: rotate(-1.5deg);">
+            <!-- Front -->
+            <div class="polaroid-face polaroid-front">
+              <div class="polaroid-tape"></div>
+              <div class="polaroid-photo-frame">
+                <img src="assets/Character_holding_pen_and_manusc._20261017095845.jpg" alt="Jaiko holding manuscript and pen" onerror="handleAssetError(this, 'Character_holding_pen_and_manusc._20261017095845.jpg')">
+              </div>
+              <div class="polaroid-caption">
+                <h4>Jaiko (Christine Goda)</h4>
+                <p>Passionate Shojo Mangaka</p>
+                <span class="polaroid-flip-hint">Click to flip 🔄</span>
+              </div>
+            </div>
+            <!-- Back -->
+            <div class="polaroid-face polaroid-back">
+              <p class="polaroid-handwriting">
+                "Her shojo romance manga manuscripts under pen-name 'Christine Goda' are genuine masterpieces of emotional storytelling. Never let Gian edit the ending! — Doraemon & Nobita"
+              </p>
+              <span class="polaroid-postmark">Goda General Store</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section H: Anywhere Door Dorayaki & Memory Delivery -->
+    <section id="anywhere-door" class="anywhere-door-section">
+      <div class="section-wrapper">
+        <div class="section-header">
+          <span class="section-badge" style="background:#FF6B9D; color:#FFF;">Anywhere Door Express</span>
+          <h2 class="section-title comic-title">Dorayaki & Memory Delivery</h2>
+          <p class="section-subtitle">
+            Step through the pink door! Send a steaming warm Dorayaki and fresh flowers to someone special, accompanied by personalized anime dialogue.
+          </p>
+        </div>
+
+        <div class="delivery-layout-grid">
+          <!-- Left Video Stage with Dynamic Overlays -->
+          <div class="delivery-video-stage">
+            <div class="delivery-video-wrapper">
+              <video id="anywhere-door-video" playsinline preload="metadata" muted>
+                <source src="assets/Animated_character_offering_food._20261017095845.mp4" type="video/mp4">
+              </video>
+
+              <!-- Floating Yellow Badge -->
+              <div class="delivery-recipient-badge">
+                Special delivery for <strong id="delivery-badge-name">Mom</strong>
+              </div>
+
+              <!-- Time-coded anime speech bubble -->
+              <div id="delivery-dialogue-bubble" class="delivery-dialogue-bubble">
+                🌸 <em>"I saved my warmest Dorayaki and fresh flowers for you..."</em>
+              </div>
+
+              <!-- Floating Canvas Doodles -->
+              <canvas id="delivery-doodle-canvas" class="delivery-doodle-canvas"></canvas>
+            </div>
+          </div>
+
+          <!-- Right Delivery Controls -->
+          <div class="delivery-control-card">
+            <h3 class="comic-title">Who are these for?</h3>
+            <p>Pick a loved one or type their name to personalize Doraemon's delivery:</p>
+
+            <div class="form-group">
+              <label class="form-label" for="delivery-recipient-input">Recipient Name:</label>
+              <input id="delivery-recipient-input" class="input-comic" type="text" value="Mom" placeholder="Enter name...">
+            </div>
+
+            <div class="recipient-pills-row">
+              <button class="recipient-pill active" type="button" data-name="Mom">Mom</button>
+              <button class="recipient-pill" type="button" data-name="Shizuka-chan">Shizuka-chan</button>
+              <button class="recipient-pill" type="button" data-name="Nobita">Nobita</button>
+              <button class="recipient-pill" type="button" data-name="My Childhood Self">My Childhood Self</button>
+              <button class="recipient-pill" type="button" data-name="Best Friend">Best Friend</button>
+            </div>
+
+            <button id="delivery-start-btn" class="btn-delivery-deliver" type="button">
+              🚪 Deliver via Anywhere Door
+            </button>
+
+            <button id="delivery-copy-link-btn" class="btn-delivery-copy" type="button">
+              🔗 Copy Shareable Link
+            </button>
+
+            <div id="delivery-status-text" class="delivery-status-text">
+              Ready to open the Anywhere Door!
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section I: 22nd Century Club (Polka-Dot Card) -->
+    <section id="club-section" class="club-section">
+      <div class="club-card-container">
+        <!-- Peeking Doraemon -->
+        <div class="club-peeking-dora">
+          <img src="assets/Character_peeking_through_torn_p._20261017095845.jpg" alt="Doraemon peeking" onerror="handleAssetError(this, 'Character_peeking_through_torn_p._20261017095845.jpg')">
+        </div>
+
+        <div class="club-polka-card">
+          <div class="club-inner-content">
+            <span class="section-badge">Secret Pocket Dispatch</span>
+            <h3 class="comic-title">Join the 22nd Century Club</h3>
+            <p>
+              Receive secret gadget breakdowns, behind-the-scenes movie nostalgia, and zero 0-point tests straight to your inbox.
+            </p>
+            <form id="club-signup-form" class="club-form-row">
+              <input id="club-email-input" class="input-comic" type="email" placeholder="Enter your email address..." required>
+              <button class="btn-hero-primary" type="submit" style="white-space:nowrap;">
+                Hop In! 🚁
+              </button>
+            </form>
+            <div id="club-form-feedback" class="club-form-feedback"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Twilight Rooftop Footer -->
+  <footer class="site-footer">
+    <div class="footer-content-grid">
+      <div class="footer-brand">
+        <h2 class="comic-title">Mata ne! またね!</h2>
+        <p>
+          "See you tomorrow!" Built with boundless gratitude for Fujiko F. Fujio, who taught generations of children to dream about the stars, love our flawed friends, and believe in the magic inside a humble desk drawer.
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#hero-section">Paper Tear Rig</a></li>
+          <li><a href="#nobi-residence">Nobi Family</a></li>
+          <li><a href="#empty-lot">Empty Lot Akichi</a></li>
+          <li><a href="#air-cannon">Air Cannon</a></li>
+          <li><a href="#anywhere-door">Anywhere Door</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Tribute Specs</h4>
+        <ul>
+          <li>Zero External Fonts</li>
+          <li>Zero Outbound CDNs</li>
+          <li>100% Web Audio Synth</li>
+          <li>60fps Spring Physics</li>
+          <li>Tactile Paper Noise</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <span>© Showa Nostalgia Fan Tribute • Made with pure HTML, CSS & Vanilla JS.</span>
+      <a href="#hero-section" class="btn-back-to-top">↑ Back to top</a>
+    </div>
+  </footer>
+
+  <!-- Mini-Dora Interactive Mascot (Bottom Right) -->
+  <div class="footer-mini-dora-container">
+    <div id="mini-dora-bubble" class="mini-dora-bubble">Dorara~! ✨</div>
+    <div id="footer-mini-dora" class="footer-mini-dora" title="Click me! Dorara~">
+      <img src="assets/Mini-Dora_waving_paw_20261017095845.jpg" alt="Mini-Dora waving paw" onerror="handleAssetError(this, 'Mini-Dora_waving_paw_20261017095845.jpg')">
+    </div>
+  </div>
+
+  <!-- Scripts in strict dependency order -->
+  <script src="js/assets-manifest.js"></script>
+  <script src="js/sound-engine.js"></script>
+  <script src="js/rig-data.js"></script>
+  <script src="js/rig.js"></script>
+  <script src="js/cast-data.js"></script>
+  <script src="js/cast.js"></script>
+  <script src="js/delivery.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -7,6 +7,9 @@
 class AnywhereDoorDelivery {
   constructor() {
     this.video = document.getElementById("anywhere-door-video");
+    this.videoWrapper = document.getElementById("delivery-video-wrapper");
+    this.playOverlayBtn = document.getElementById("video-play-overlay-btn");
+    this.soundToggleBtn = document.getElementById("video-sound-toggle-btn");
     this.nameInput = document.getElementById("delivery-recipient-input");
     this.badgeName = document.getElementById("delivery-badge-name");
     this.dialogueBubble = document.getElementById("delivery-dialogue-bubble");
@@ -24,6 +27,25 @@ class AnywhereDoorDelivery {
   }
 
   init() {
+    // Mobile-safe initial video properties
+    if (this.video) {
+      this.video.muted = true;
+      this.video.defaultMuted = true;
+      this.video.playsInline = true;
+      this.video.setAttribute("playsinline", "");
+      this.video.setAttribute("webkit-playsinline", "");
+
+      this.video.addEventListener("timeupdate", () => this.onTimeUpdate());
+      this.video.addEventListener("ended", () => this.onVideoEnded());
+      this.video.addEventListener("play", () => this.updatePlayState(true));
+      this.video.addEventListener("pause", () => this.updatePlayState(false));
+
+      // Attempt preload without blocking
+      try {
+        this.video.load();
+      } catch (e) {}
+    }
+
     // Check URL parameters for ?to=Name
     const params = new URLSearchParams(window.location.search);
     const toParam = params.get("to");
@@ -55,16 +77,55 @@ class AnywhereDoorDelivery {
       this.deliverBtn.addEventListener("click", () => this.deliverNow());
     }
 
+    if (this.playOverlayBtn) {
+      this.playOverlayBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.deliverNow();
+      });
+    }
+
+    if (this.videoWrapper) {
+      this.videoWrapper.addEventListener("click", () => {
+        if (!this.video) return;
+        if (this.video.paused) {
+          this.deliverNow();
+        } else {
+          this.video.pause();
+        }
+      });
+    }
+
+    if (this.soundToggleBtn && this.video) {
+      this.soundToggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        this.video.muted = !this.video.muted;
+        this.soundToggleBtn.textContent = this.video.muted ? "🔇 Sound: OFF" : "🔊 Sound: ON";
+        this.soundToggleBtn.classList.toggle("unmuted", !this.video.muted);
+      });
+    }
+
     if (this.copyLinkBtn) {
       this.copyLinkBtn.addEventListener("click", () => this.copyShareableLink());
     }
 
-    if (this.video) {
-      this.video.addEventListener("timeupdate", () => this.onTimeUpdate());
-      this.video.addEventListener("ended", () => this.onVideoEnded());
-    }
-
     this.initCanvas();
+  }
+
+  updatePlayState(isPlaying) {
+    if (this.videoWrapper) {
+      this.videoWrapper.classList.toggle("is-playing", isPlaying);
+    }
+    if (this.playOverlayBtn) {
+      if (isPlaying) {
+        this.playOverlayBtn.classList.add("hidden");
+      } else {
+        this.playOverlayBtn.classList.remove("hidden");
+        const isEnded = this.video && (this.video.ended || this.video.currentTime >= 9.5);
+        this.playOverlayBtn.innerHTML = isEnded 
+          ? `<span class="play-overlay-icon">🔄</span><span class="play-overlay-text">Deliver Again</span>`
+          : `<span class="play-overlay-icon">▶</span><span class="play-overlay-text">Play Delivery</span>`;
+      }
+    }
   }
 
   setRecipient(name) {
@@ -82,11 +143,23 @@ class AnywhereDoorDelivery {
       window.soundEngine.playChime();
     }
 
-    this.video.currentTime = 0;
+    // If ended or near end, restart
+    if (this.video.ended || this.video.currentTime >= 9.5) {
+      this.video.currentTime = 0;
+    }
+
+    this.video.muted = this.soundToggleBtn && this.soundToggleBtn.classList.contains("unmuted") ? false : true;
+    this.video.defaultMuted = true;
+    this.video.playsInline = true;
+
     const playPromise = this.video.play();
     if (playPromise !== undefined) {
-      playPromise.catch((err) => {
-        console.warn("Video play interrupted", err);
+      playPromise.then(() => {
+        this.updatePlayState(true);
+      }).catch((err) => {
+        console.warn("Video play interrupted, retrying muted...", err);
+        this.video.muted = true;
+        this.video.play().then(() => this.updatePlayState(true)).catch(e => console.error("Playback fallback error:", e));
       });
     }
 
@@ -101,13 +174,13 @@ class AnywhereDoorDelivery {
     if (!this.video || !this.dialogueBubble) return;
     const t = this.video.currentTime;
 
-    if (t >= 0.3 && t < 2.8) {
+    if (t >= 0.2 && t < 2.8) {
       this.dialogueBubble.innerHTML = `🌸 <em>"I saved my warmest Dorayaki and fresh flowers for you, <strong>${this.recipientName}</strong>..."</em>`;
       this.dialogueBubble.classList.add("show");
     } else if (t >= 2.8 && t < 5.8) {
       this.dialogueBubble.innerHTML = `🥞 <em>"Hehe... thank you for always being part of our childhood, <strong>${this.recipientName}</strong>!"</em>`;
       this.dialogueBubble.classList.add("show");
-    } else if (t >= 5.8) {
+    } else if (t >= 5.8 && t < 9.5) {
       this.dialogueBubble.innerHTML = `✨ <em>"Eat it while it's still warm! Mata ne, <strong>${this.recipientName}</strong>!"</em>`;
       this.dialogueBubble.classList.add("show");
       if (Math.random() > 0.6) {
@@ -119,6 +192,7 @@ class AnywhereDoorDelivery {
   }
 
   onVideoEnded() {
+    this.updatePlayState(false);
     if (this.statusText) {
       this.statusText.textContent = `🥞 ${this.recipientName} received the warm Dorayaki and smiled!`;
     }

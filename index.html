@@ -242,11 +242,11 @@
 
             <!-- Direct Click Hotspots on Characters -->
             <div class="tatami-hotspots-container">
-              <button type="button" class="tatami-hotspot" data-family-idx="0" style="left: 17%; top: 46%; width: 27%; height: 50%;" title="Spotlight Doraemon" aria-label="Select Doraemon"></button>
-              <button type="button" class="tatami-hotspot" data-family-idx="1" style="left: 41%; top: 22%; width: 19%; height: 68%;" title="Spotlight Nobita" aria-label="Select Nobita"></button>
-              <button type="button" class="tatami-hotspot" data-family-idx="2" style="left: 28%; top: 12%; width: 21%; height: 52%;" title="Spotlight Tamako (Mom)" aria-label="Select Tamako"></button>
-              <button type="button" class="tatami-hotspot" data-family-idx="3" style="left: 54%; top: 13%; width: 25%; height: 55%;" title="Spotlight Nobisuke (Dad)" aria-label="Select Nobisuke"></button>
-              <button type="button" class="tatami-hotspot" data-family-idx="4" style="left: 58%; top: 46%; width: 26%; height: 50%;" title="Spotlight Dorami" aria-label="Select Dorami"></button>
+              <button type="button" class="tatami-hotspot" data-family-idx="0" style="left: 15%; top: 46%; width: 22%; height: 50%;" title="Spotlight Doraemon" aria-label="Select Doraemon"></button>
+              <button type="button" class="tatami-hotspot" data-family-idx="2" style="left: 28%; top: 12%; width: 17%; height: 46%;" title="Spotlight Tamako (Mom)" aria-label="Select Tamako"></button>
+              <button type="button" class="tatami-hotspot" data-family-idx="1" style="left: 41%; top: 22%; width: 17%; height: 68%;" title="Spotlight Nobita" aria-label="Select Nobita"></button>
+              <button type="button" class="tatami-hotspot" data-family-idx="3" style="left: 57%; top: 12%; width: 23%; height: 44%;" title="Spotlight Nobisuke (Dad)" aria-label="Select Nobisuke"></button>
+              <button type="button" class="tatami-hotspot" data-family-idx="4" style="left: 62%; top: 48%; width: 22%; height: 48%;" title="Spotlight Dorami" aria-label="Select Dorami"></button>
             </div>
 
             <!-- Reaction Move Overlay Stage -->
@@ -326,10 +326,9 @@
 
               <!-- Hotspot clicks directly on the pipe characters -->
               <div class="empty-lot-hotspots-container">
-                <button type="button" class="empty-lot-hotspot" data-char="shizuka" style="left: 51%; top: 38%; width: 5.5%; height: 22%;" title="Spotlight Shizuka"></button>
-                <button type="button" class="empty-lot-hotspot" data-char="gian" style="left: 56.5%; top: 34%; width: 6.5%; height: 24%;" title="Spotlight Gian"></button>
-                <button type="button" class="empty-lot-hotspot" data-char="suneo" style="left: 64%; top: 38%; width: 6%; height: 22%;" title="Spotlight Suneo"></button>
-                <button type="button" class="empty-lot-hotspot" data-char="dekisugi" style="left: 51%; top: 34%; width: 19%; height: 26%;" title="Spotlight Empty Lot Gang"></button>
+                <button type="button" class="empty-lot-hotspot" data-char="shizuka" style="left: 60%; top: 31%; width: 7.5%; height: 26%;" title="Spotlight Shizuka"></button>
+                <button type="button" class="empty-lot-hotspot" data-char="gian" style="left: 67%; top: 26%; width: 9%; height: 28%;" title="Spotlight Gian"></button>
+                <button type="button" class="empty-lot-hotspot" data-char="suneo" style="left: 76%; top: 32%; width: 8.5%; height: 25%;" title="Spotlight Suneo"></button>
               </div>
 
               <div id="empty-lot-feature-bubble" class="feature-speech-bubble">
@@ -533,10 +532,22 @@
         <div class="delivery-layout-grid">
           <!-- Left Video Stage with Dynamic Overlays -->
           <div class="delivery-video-stage">
-            <div class="delivery-video-wrapper">
-              <video id="anywhere-door-video" playsinline preload="metadata" muted>
+            <div class="delivery-video-wrapper" id="delivery-video-wrapper">
+              <video id="anywhere-door-video" playsinline webkit-playsinline preload="auto" muted>
                 <source src="assets/Animated_character_offering_food._20261017095845.mp4" type="video/mp4">
+                <source src="assets/Animated_character_offering_food _20261017095845.mp4" type="video/mp4">
               </video>
+
+              <!-- Central Big Play/Replay Button Overlay -->
+              <button id="video-play-overlay-btn" class="video-play-overlay-btn" type="button" aria-label="Play Delivery Video">
+                <span class="play-overlay-icon">▶</span>
+                <span class="play-overlay-text">Play Delivery</span>
+              </button>
+
+              <!-- Video Sound / Unmute Button in corner -->
+              <button id="video-sound-toggle-btn" class="video-sound-toggle-btn" type="button" aria-label="Toggle Video Sound">
+                🔇 Sound: OFF
+              </button>
 
               <!-- Floating Yellow Badge -->
               <div class="delivery-recipient-badge">

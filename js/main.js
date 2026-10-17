@@ -405,33 +405,52 @@ function initPreloader() {
 
   let progress = 0;
   let entered = false;
+  let autoDismissTimer = null;
 
   const dismiss = () => {
     if (entered) return;
     entered = true;
-    if (window.soundEngine) {
-      window.soundEngine.ensureContext();
-      window.soundEngine.playIntroMusic();
+    if (autoDismissTimer) clearTimeout(autoDismissTimer);
+    if (interval) clearInterval(interval);
+
+    try {
+      if (window.soundEngine) {
+        window.soundEngine.ensureContext();
+        window.soundEngine.playIntroMusic();
+      }
+    } catch (e) {
+      console.warn("Audio intro exception:", e);
     }
+
     preloader.classList.add("fade-out");
     setTimeout(() => {
-      preloader.remove();
-    }, 600);
+      try {
+        preloader.remove();
+      } catch (e) {}
+    }, 550);
   };
 
+  // Support click, touchend, and pointerup for instant response on mobile & desktop
+  const tapEvents = ["click", "touchend", "pointerup"];
   if (enterBtn) {
-    enterBtn.addEventListener("click", (e) => {
-      e.stopPropagation();
-      dismiss();
+    tapEvents.forEach((evt) => {
+      enterBtn.addEventListener(evt, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        dismiss();
+      }, { passive: false });
     });
   }
 
-  preloader.addEventListener("click", () => {
-    dismiss();
+  tapEvents.forEach((evt) => {
+    preloader.addEventListener(evt, (e) => {
+      // If clicking inside the card or on backdrop, allow entering
+      dismiss();
+    });
   });
 
   const interval = setInterval(() => {
-    progress += Math.random() * 24 + 10;
+    progress += Math.random() * 26 + 14;
     if (progress >= 100) {
       progress = 100;
       clearInterval(interval);
@@ -439,14 +458,22 @@ function initPreloader() {
       if (statusText) statusText.textContent = "4D Pocket Synchronized! Ready to Enter!";
       if (enterBtn) {
         enterBtn.classList.add("pulse");
-        enterBtn.focus();
       }
+      // Auto-dismiss after 900ms so user is never stuck
+      autoDismissTimer = setTimeout(() => {
+        dismiss();
+      }, 900);
     } else {
       if (progressBar) progressBar.style.width = `${progress}%`;
-      if (progress > 55 && statusText) {
+      if (progress > 50 && statusText) {
         statusText.textContent = "Summoning Anywhere Door & Take-Copter...";
       }
     }
-  }, 85);
+  }, 70);
+
+  // Maximum failsafe: dismiss after 3.2s even if device timer is throttled
+  setTimeout(() => {
+    if (!entered) dismiss();
+  }, 3200);
 }
 

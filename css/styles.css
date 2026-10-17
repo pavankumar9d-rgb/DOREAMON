@@ -1666,6 +1666,64 @@ h1, h2, h3, h4, .comic-title {
   display: block;
 }
 
+/* Video Play/Replay Center Overlay Button */
+.video-play-overlay-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 12;
+  background: rgba(230, 0, 18, 0.95);
+  color: white;
+  border: 3px solid var(--ink-black);
+  box-shadow: 4px 4px 0 var(--ink-black);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-family: var(--font-comic);
+  font-size: 1.05rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.video-play-overlay-btn:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  background: #c80010;
+  box-shadow: 6px 6px 0 var(--ink-black);
+}
+
+.video-play-overlay-btn.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.8);
+}
+
+/* Video Sound Toggle Button */
+.video-sound-toggle-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 11;
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--ink-black);
+  border: 2px solid var(--ink-black);
+  box-shadow: 2px 2px 0 var(--ink-black);
+  padding: 5px 12px;
+  border-radius: 14px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.video-sound-toggle-btn.unmuted {
+  background: #FFD700;
+  color: var(--ink-black);
+}
+
 /* Floating Yellow Badge */
 .delivery-recipient-badge {
   position: absolute;
@@ -2695,6 +2753,20 @@ h1, h2, h3, h4, .comic-title {
     aspect-ratio: 16 / 9;
     max-height: 200px;
     object-fit: cover;
+  }
+
+  .video-play-overlay-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    box-shadow: 2.5px 2.5px 0 var(--ink-black);
+  }
+
+  .video-sound-toggle-btn {
+    top: 8px;
+    right: 8px;
+    font-size: 0.68rem;
+    padding: 3px 8px;
+    border-radius: 10px;
   }
 
   .delivery-recipient-badge {

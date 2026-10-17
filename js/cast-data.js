@@ -16,7 +16,7 @@ const NOBI_FAMILY = [
     moveSpeech: "Bean-paste perfection! Nothing beats freshly steamed dorayaki!",
     moveImg: "doraemonDorayaki",
     actionType: "dorayaki",
-    spotlight: { x: "31%", y: "68%", rx: "17%", ry: "25%", badge: "Doraemon ドラえもん" }
+    spotlight: { x: "27%", y: "66%", rx: "15%", ry: "24%", badge: "Doraemon ドラえもん" }
   },
   {
     id: "nobita",
@@ -30,7 +30,7 @@ const NOBI_FAMILY = [
     moveSpeech: "Doraemoooon! Help me hide this 0-point test before Mom gets home!!",
     moveImg: "nobitaScore",
     actionType: "testScore",
-    spotlight: { x: "50.5%", y: "54%", rx: "15%", ry: "36%", badge: "Nobita のび太" }
+    spotlight: { x: "49%", y: "54%", rx: "13%", ry: "34%", badge: "Nobita のび太" }
   },
   {
     id: "tamako",
@@ -44,7 +44,7 @@ const NOBI_FAMILY = [
     moveSpeech: "NOBITAAA!! Sit down right there and listen to me for an hour!!",
     moveImg: "tamakoScold",
     actionType: "scold",
-    spotlight: { x: "39%", y: "39%", rx: "14%", ry: "28%", badge: "Tamako (Mom) 玉子" }
+    spotlight: { x: "36%", y: "36%", rx: "14%", ry: "26%", badge: "Tamako (Mom) 玉子" }
   },
   {
     id: "nobisuke",
@@ -58,7 +58,7 @@ const NOBI_FAMILY = [
     moveSpeech: "FORE!! This new swing grip from the golf magazine feels promising!",
     moveImg: "nobisukeGolf",
     actionType: "golf",
-    spotlight: { x: "65%", y: "41%", rx: "18%", ry: "30%", badge: "Nobisuke (Dad) のび助" }
+    spotlight: { x: "67%", y: "38%", rx: "17%", ry: "28%", badge: "Nobisuke (Dad) のび助" }
   },
   {
     id: "dorami",
@@ -72,7 +72,7 @@ const NOBI_FAMILY = [
     moveSpeech: "Big brother! Have some delicious sweet melon bread and cheer up!",
     moveImg: "doramiMelonPan",
     actionType: "melonPan",
-    spotlight: { x: "69%", y: "68%", rx: "16%", ry: "25%", badge: "Dorami ドラミ" }
+    spotlight: { x: "71%", y: "68%", rx: "15%", ry: "24%", badge: "Dorami ドラミ" }
   }
 ];
 
@@ -87,7 +87,7 @@ const EMPTY_LOT_GANG = [
     popText: "Warm sweet potato fresh from the fire! Please don't tell the boys!",
     imgKey: "shizukaPotato",
     doodle: "🍠",
-    spotlight: { x: "53.8%", y: "48%", rx: "5.5%", ry: "14%", badge: "Shizuka Minamoto 源静香" }
+    spotlight: { x: "64.5%", y: "44%", rx: "5.5%", ry: "14%", badge: "Shizuka Minamoto 源静香" }
   },
   {
     id: "gian",
@@ -99,7 +99,7 @@ const EMPTY_LOT_GANG = [
     popText: "MY VOICE IS PURE SOUL! LISTEN TO MY 3-HOUR RECITAL!!",
     imgKey: "gianConcert",
     doodle: "🎤",
-    spotlight: { x: "59.6%", y: "44%", rx: "7.5%", ry: "16%", badge: "Takeshi 'Gian' Gouda 剛田武" }
+    spotlight: { x: "72%", y: "40%", rx: "7%", ry: "16%", badge: "Takeshi 'Gian' Gouda 剛田武" }
   },
   {
     id: "suneo",
@@ -111,7 +111,7 @@ const EMPTY_LOT_GANG = [
     popText: "Sorry Nobita, this high-end yacht trip only has seats for three!",
     imgKey: "suneoAirplane",
     doodle: "✈️",
-    spotlight: { x: "67.1%", y: "48%", rx: "6%", ry: "14%", badge: "Suneo Honekawa 骨川スネ夫" }
+    spotlight: { x: "81%", y: "44%", rx: "5.5%", ry: "14%", badge: "Suneo Honekawa 骨川スネ夫" }
   },
   {
     id: "dekisugi",
@@ -123,7 +123,7 @@ const EMPTY_LOT_GANG = [
     popText: "I finished summarizing the astronomy chapter. Would you like to study together, Nobita?",
     imgKey: "dekisugiBook",
     doodle: "📚",
-    spotlight: { x: "60%", y: "46%", rx: "16%", ry: "14%", badge: "Hidetoshi Dekisugi 出木杉英才" }
+    spotlight: { x: "50%", y: "50%", rx: "48%", ry: "48%", badge: "Hidetoshi Dekisugi 出木杉英才 (Honors Scholar)" }
   }
 ];
 

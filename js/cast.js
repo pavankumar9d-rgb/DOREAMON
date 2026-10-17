@@ -74,6 +74,8 @@ class CastController {
     const moveSpeech = document.getElementById("family-move-bubble");
     const tatamiWrapper = document.getElementById("tatami-frame-wrapper");
     const spotlightBadgeText = document.getElementById("tatami-spotlight-badge-text");
+    const overlayImg = document.getElementById("family-action-overlay-img");
+    const overlayStage = document.getElementById("family-action-overlay-stage");
 
     if (kanjiEl) kanjiEl.textContent = member.kanji;
     if (nameEl) nameEl.textContent = member.name;
@@ -82,6 +84,18 @@ class CastController {
     if (favEl) favEl.textContent = member.favorite;
     if (weakEl) weakEl.textContent = member.weakness;
     if (moveBtn) moveBtn.innerHTML = member.moveButton;
+
+    // Synchronize overlay image and speech text immediately so it always matches selected character
+    if (overlayImg && member.moveImg) {
+      overlayImg.dataset.triedFallback = "0";
+      overlayImg.src = window.resolveAsset(member.moveImg);
+      overlayImg.alt = `${member.name} Signature Move`;
+    }
+
+    if (moveSpeech) {
+      moveSpeech.textContent = member.moveSpeech;
+      moveSpeech.classList.remove("show");
+    }
 
     // Apply spotlight focus and dim remaining characters
     if (tatamiWrapper && member.spotlight) {
@@ -96,13 +110,7 @@ class CastController {
       spotlightBadgeText.textContent = member.spotlight.badge;
     }
 
-    if (moveSpeech) {
-      moveSpeech.classList.remove("show");
-    }
-
     // Reset overlay stage
-    const overlayImg = document.getElementById("family-action-overlay-img");
-    const overlayStage = document.getElementById("family-action-overlay-stage");
     if (overlayStage) overlayStage.classList.remove("active");
     if (tatamiWrapper) tatamiWrapper.classList.remove("action-active");
   }
@@ -117,7 +125,9 @@ class CastController {
     const tatamiWrapper = document.getElementById("tatami-frame-wrapper");
 
     if (overlayImg && member.moveImg) {
+      overlayImg.dataset.triedFallback = "0";
       overlayImg.src = window.resolveAsset(member.moveImg);
+      overlayImg.alt = `${member.name} Signature Move`;
     }
 
     if (overlayStage) {

@@ -98,8 +98,8 @@ function initAirCannon() {
   const getMuzzlePos = () => {
     syncCanvasSize();
     return {
-      x: (canvas.width || 480) * 0.705,
-      y: (canvas.height || 360) * 0.22
+      x: (canvas.width || 480) * 0.56,
+      y: (canvas.height || 360) * 0.28
     };
   };
 
@@ -247,9 +247,9 @@ function initAirCannon() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       ctx.save();
-      // 1. High-energy shockwave beam thrusting out of the cannon barrel forward/down-left
+      // 1. High-energy shockwave beam thrusting out of the cannon barrel forward into the sky
       const beamDist = p * Math.hypot(canvas.width, canvas.height) * 1.1;
-      const angle = Math.PI * 0.82; // Forward towards Nobita / spectator
+      const angle = -Math.PI * 0.31; // Firing upwards & rightwards along the cannon barrel axis
       const targetX = cx + Math.cos(angle) * beamDist;
       const targetY = cy + Math.sin(angle) * beamDist;
 

@@ -87,7 +87,7 @@ const EMPTY_LOT_GANG = [
     popText: "Warm sweet potato fresh from the fire! Please don't tell the boys!",
     imgKey: "shizukaPotato",
     doodle: "🍠",
-    spotlight: { x: "32.5%", y: "47%", rx: "6%", ry: "12%", badge: "Shizuka Minamoto 源静香" }
+    spotlight: { x: "53.8%", y: "48%", rx: "5.5%", ry: "14%", badge: "Shizuka Minamoto 源静香" }
   },
   {
     id: "gian",
@@ -99,7 +99,7 @@ const EMPTY_LOT_GANG = [
     popText: "MY VOICE IS PURE SOUL! LISTEN TO MY 3-HOUR RECITAL!!",
     imgKey: "gianConcert",
     doodle: "🎤",
-    spotlight: { x: "35%", y: "46%", rx: "6.5%", ry: "13%", badge: "Takeshi 'Gian' Gouda 剛田武" }
+    spotlight: { x: "59.6%", y: "44%", rx: "7.5%", ry: "16%", badge: "Takeshi 'Gian' Gouda 剛田武" }
   },
   {
     id: "suneo",
@@ -111,7 +111,7 @@ const EMPTY_LOT_GANG = [
     popText: "Sorry Nobita, this high-end yacht trip only has seats for three!",
     imgKey: "suneoAirplane",
     doodle: "✈️",
-    spotlight: { x: "37.5%", y: "47%", rx: "6%", ry: "12%", badge: "Suneo Honekawa 骨川スネ夫" }
+    spotlight: { x: "67.1%", y: "48%", rx: "6%", ry: "14%", badge: "Suneo Honekawa 骨川スネ夫" }
   },
   {
     id: "dekisugi",
@@ -123,7 +123,7 @@ const EMPTY_LOT_GANG = [
     popText: "I finished summarizing the astronomy chapter. Would you like to study together, Nobita?",
     imgKey: "dekisugiBook",
     doodle: "📚",
-    spotlight: { x: "40%", y: "47%", rx: "6%", ry: "12%", badge: "Hidetoshi Dekisugi 出木杉英才" }
+    spotlight: { x: "60%", y: "46%", rx: "16%", ry: "14%", badge: "Hidetoshi Dekisugi 出木杉英才" }
   }
 ];
 

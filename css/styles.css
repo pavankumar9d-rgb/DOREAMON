@@ -1092,7 +1092,7 @@ h1, h2, h3, h4, .comic-title {
   z-index: 4;
   opacity: 0;
   background: radial-gradient(
-    ellipse var(--spot-rx, 6.5%) var(--spot-ry, 13%) at var(--spot-x, 35%) var(--spot-y, 46%),
+    ellipse var(--spot-rx, 7.5%) var(--spot-ry, 16%) at var(--spot-x, 59.6%) var(--spot-y, 44%),
     rgba(0, 0, 0, 0) 0%,
     rgba(0, 0, 0, 0) 65%,
     rgba(10, 8, 20, 0.45) 86%,
@@ -1119,7 +1119,7 @@ h1, h2, h3, h4, .comic-title {
       transparent 100%
     ),
     radial-gradient(
-      ellipse calc(var(--spot-rx, 6.5%) * 1.35) calc(var(--spot-ry, 13%) * 1.35) at var(--spot-x, 35%) var(--spot-y, 46%),
+      ellipse calc(var(--spot-rx, 7.5%) * 1.35) calc(var(--spot-ry, 16%) * 1.35) at var(--spot-x, 59.6%) var(--spot-y, 44%),
       rgba(255, 245, 160, 0.42) 0%,
       rgba(255, 215, 0, 0.22) 55%,
       transparent 100%
@@ -1134,8 +1134,8 @@ h1, h2, h3, h4, .comic-title {
 
 .empty-lot-spotlight-badge {
   position: absolute;
-  left: var(--spot-x, 35%);
-  top: max(10px, calc(var(--spot-y, 46%) - var(--spot-ry, 13%) - 26px));
+  left: var(--spot-x, 59.6%);
+  top: max(10px, calc(var(--spot-y, 44%) - var(--spot-ry, 16%) - 26px));
   transform: translateX(-50%);
   z-index: 8;
   pointer-events: none;

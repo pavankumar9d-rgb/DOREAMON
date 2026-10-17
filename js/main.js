@@ -79,12 +79,33 @@ function initAirCannon() {
   let chargeTimer = null;
   let blastsFired = 0;
   let energyAngle = 0;
+  let isFiringBeam = false;
 
   if (!triggerBtn) return;
 
+  const syncCanvasSize = () => {
+    if (!canvas) return;
+    const w = canvas.offsetWidth || 480;
+    const h = canvas.offsetHeight || 360;
+    if (canvas.width !== w || canvas.height !== h) {
+      canvas.width = w;
+      canvas.height = h;
+    }
+  };
+  syncCanvasSize();
+  window.addEventListener("resize", syncCanvasSize);
+
+  const getMuzzlePos = () => {
+    syncCanvasSize();
+    return {
+      x: (canvas.width || 480) * 0.705,
+      y: (canvas.height || 360) * 0.22
+    };
+  };
+
   const startCharge = (e) => {
     e.preventDefault();
-    if (isCharging) return;
+    if (isCharging || isFiringBeam) return;
     isCharging = true;
     chargeProgress = 0;
 
@@ -124,46 +145,49 @@ function initAirCannon() {
     triggerBtn.classList.remove("charging");
     if (sunburstBg) sunburstBg.classList.remove("fast-spin");
 
-    if (chargeProgress >= 0.92) {
-      // FIRE BLAST!
-      fireAirCannon();
-    } else {
-      // Cancelled early
-      if (window.soundEngine) window.soundEngine.stopAirCannonCharge();
-    }
-
-    // Reset bar
+    const finalCharge = chargeProgress;
     chargeProgress = 0;
     if (chargeFill) {
       chargeFill.style.width = "0%";
     }
     triggerBtn.classList.remove("fully-charged");
+
+    if (finalCharge >= 0.85) {
+      // Fire beam and shockwave after release!
+      fireAirCannon();
+    } else {
+      // Cancelled early without firing
+      if (window.soundEngine) window.soundEngine.stopAirCannonCharge();
+      if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
   };
 
   const fireAirCannon = () => {
-    blastsFired++;
-    if (blastCountEl) blastCountEl.textContent = blastsFired.toString();
-
+    isFiringBeam = true;
     if (window.soundEngine) {
       window.soundEngine.playAirCannonBlast();
     }
 
-    // Screen flash
-    if (blastFlash) {
-      blastFlash.classList.add("fire");
-      setTimeout(() => blastFlash.classList.remove("fire"), 400);
-    }
+    // Fire laser shockwave beam directly from gadget muzzle
+    renderBeamAndShockwave(() => {
+      // Impact moment (after releasing and firing beam)
+      blastsFired++;
+      if (blastCountEl) blastCountEl.textContent = blastsFired.toString();
 
-    // Dokan comic explosion burst
-    if (dokanBadge) {
-      dokanBadge.classList.remove("show");
-      void dokanBadge.offsetWidth;
-      dokanBadge.classList.add("show");
-      setTimeout(() => dokanBadge.classList.remove("show"), 1400);
-    }
+      // Screen flash
+      if (blastFlash) {
+        blastFlash.classList.add("fire");
+        setTimeout(() => blastFlash.classList.remove("fire"), 300);
+      }
 
-    // Canvas shockwave rings
-    renderShockwaveRings();
+      // Dokan comic explosion card/badge pops out on impact
+      if (dokanBadge) {
+        dokanBadge.classList.remove("show");
+        void dokanBadge.offsetWidth;
+        dokanBadge.classList.add("show");
+        setTimeout(() => dokanBadge.classList.remove("show"), 1300);
+      }
+    });
   };
 
   triggerBtn.addEventListener("mousedown", startCharge);
@@ -171,22 +195,22 @@ function initAirCannon() {
   triggerBtn.addEventListener("touchstart", startCharge, { passive: false });
   window.addEventListener("touchend", endCharge);
 
-  // Muzzle energy sphere loop
+  // Muzzle energy sphere loop (active during hold)
   const renderEnergyCanvas = () => {
-    if (ctx && canvas) {
+    if (ctx && canvas && !isFiringBeam) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       if (chargeProgress > 0) {
-        const cx = canvas.width / 2;
-        const cy = canvas.height / 2;
-        const radius = 10 + chargeProgress * 32;
+        const { x: cx, y: cy } = getMuzzlePos();
+        const radius = 8 + chargeProgress * 26;
 
-        energyAngle += 0.15 + chargeProgress * 0.2;
+        energyAngle += 0.16 + chargeProgress * 0.22;
 
-        // Glowing core
+        // Glowing blue/gold plasma core at gadget muzzle
         const grad = ctx.createRadialGradient(cx, cy, 2, cx, cy, radius);
-        grad.addColorStop(0, "rgba(255, 255, 255, 0.95)");
-        grad.addColorStop(0.5, "rgba(0, 200, 255, 0.7)");
+        grad.addColorStop(0, "rgba(255, 255, 255, 0.98)");
+        grad.addColorStop(0.45, "rgba(0, 215, 255, 0.85)");
+        grad.addColorStop(0.85, "rgba(0, 119, 182, 0.4)");
         grad.addColorStop(1, "rgba(0, 119, 182, 0)");
 
         ctx.fillStyle = grad;
@@ -194,13 +218,13 @@ function initAirCannon() {
         ctx.arc(cx, cy, radius, 0, Math.PI * 2);
         ctx.fill();
 
-        // Energy arcs
-        ctx.strokeStyle = "rgba(255, 220, 0, 0.85)";
+        // Atmospheric compression arcs swirling inward
+        ctx.strokeStyle = "rgba(255, 225, 50, 0.9)";
         ctx.lineWidth = 2.5;
         for (let i = 0; i < 4; i++) {
           const a = energyAngle + (i * Math.PI) / 2;
           ctx.beginPath();
-          ctx.arc(cx, cy, radius * 0.75, a, a + 0.8);
+          ctx.arc(cx, cy, radius * 0.72, a, a + 0.85);
           ctx.stroke();
         }
       }
@@ -209,25 +233,66 @@ function initAirCannon() {
   };
   requestAnimationFrame(renderEnergyCanvas);
 
-  function renderShockwaveRings() {
+  function renderBeamAndShockwave(onImpact) {
     if (!ctx || !canvas) return;
-    let r = 20;
-    const maxR = 240;
-    const animShock = () => {
-      r += 12;
+    const { x: cx, y: cy } = getMuzzlePos();
+    let frame = 0;
+    const totalFrames = 26;
+    let impactTriggered = false;
+
+    const anim = () => {
+      frame++;
+      const p = frame / totalFrames;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
       ctx.save();
-      ctx.strokeStyle = `rgba(255, 255, 255, ${1 - r / maxR})`;
-      ctx.lineWidth = 6;
+      // 1. High-energy shockwave beam thrusting out of the cannon barrel forward/down-left
+      const beamDist = p * Math.hypot(canvas.width, canvas.height) * 1.1;
+      const angle = Math.PI * 0.82; // Forward towards Nobita / spectator
+      const targetX = cx + Math.cos(angle) * beamDist;
+      const targetY = cy + Math.sin(angle) * beamDist;
+
+      const beamGrad = ctx.createLinearGradient(cx, cy, targetX, targetY);
+      beamGrad.addColorStop(0, `rgba(255, 255, 255, ${Math.max(0, 1 - p)})`);
+      beamGrad.addColorStop(0.3, `rgba(0, 220, 255, ${Math.max(0, 0.9 * (1 - p))})`);
+      beamGrad.addColorStop(1, "rgba(0, 119, 182, 0)");
+
+      ctx.strokeStyle = beamGrad;
+      ctx.lineWidth = Math.max(2, 34 * (1 - p * 0.7));
+      ctx.lineCap = "round";
       ctx.beginPath();
-      ctx.arc(canvas.width / 2, canvas.height / 2, r, 0, Math.PI * 2);
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(targetX, targetY);
       ctx.stroke();
+
+      // 2. Expanding concentric shockwave rings from gadget muzzle
+      for (let i = 0; i < 3; i++) {
+        const ringR = Math.max(0, (p * 260) - i * 35);
+        if (ringR > 0) {
+          ctx.strokeStyle = `rgba(255, 255, 255, ${Math.max(0, (1 - p) * 0.85)})`;
+          ctx.lineWidth = Math.max(1, 5 * (1 - p));
+          ctx.beginPath();
+          ctx.arc(cx, cy, ringR, 0, Math.PI * 2);
+          ctx.stroke();
+        }
+      }
       ctx.restore();
 
-      if (r < maxR) {
-        requestAnimationFrame(animShock);
+      // Trigger impact callback after initial beam explosion
+      if (frame >= 4 && !impactTriggered) {
+        impactTriggered = true;
+        if (onImpact) onImpact();
+      }
+
+      if (frame < totalFrames) {
+        requestAnimationFrame(anim);
+      } else {
+        isFiringBeam = false;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
       }
     };
-    animShock();
+    requestAnimationFrame(anim);
   }
 }
 

@@ -818,6 +818,14 @@ h1, h2, h3, h4, .comic-title {
   opacity: 1;
 }
 
+.tatami-frame-wrapper.action-active .tatami-spotlight-badge,
+.tatami-frame-wrapper.action-active .tatami-spotlight-dimmer,
+.tatami-frame-wrapper.action-active .tatami-spotlight-beam {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 @keyframes spotlightBadgeFloat {
   0%, 100% { transform: translate(-50%, 0); }
   50% { transform: translate(-50%, -6px); }
@@ -2208,32 +2216,43 @@ h1, h2, h3, h4, .comic-title {
     transform: translateY(-1px);
   }
 
+  /* Global section clearance for bottom fixed HUD (Narrator Pill & Mini-Dora) */
+  .hero-section,
+  .nobi-residence-section,
+  .empty-lot-section,
+  .air-cannon-section,
+  .neighborhood-section,
+  .anywhere-door-section,
+  .club-section {
+    padding-bottom: 95px !important;
+  }
+
   /* Hero Section */
   .hero-section {
-    padding: 24px 14px 44px;
+    padding: 20px 14px 95px;
     min-height: auto;
   }
 
   .hero-splash-header {
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
 
   .hero-eyebrow {
-    font-size: 1rem;
+    font-size: 0.92rem;
   }
 
   .hero-main-title {
-    font-size: clamp(2.4rem, 11vw, 3.8rem);
-    text-shadow: 4px 4px 0 var(--ink-black);
-    -webkit-text-stroke: 1.5px var(--ink-black);
+    font-size: clamp(2.3rem, 10vw, 3.4rem);
+    text-shadow: 3px 3px 0 var(--ink-black);
+    -webkit-text-stroke: 1px var(--ink-black);
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
+    font-size: 0.92rem;
   }
 
   .hero-drawer-prompt {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     padding: 4px 10px;
     border-radius: 12px;
     max-width: 94%;
@@ -2242,14 +2261,14 @@ h1, h2, h3, h4, .comic-title {
   .hero-content-grid {
     display: flex;
     flex-direction: column-reverse;
-    gap: 24px;
+    gap: 20px;
     width: 100%;
     max-width: 100%;
   }
 
   .hero-rig-stage {
     width: 100%;
-    max-width: 320px;
+    max-width: 300px;
     aspect-ratio: 1 / 1;
     margin: 0 auto;
   }
@@ -2257,7 +2276,7 @@ h1, h2, h3, h4, .comic-title {
   .rig-speech-bubble {
     right: 4px;
     top: -12px;
-    font-size: 0.88rem;
+    font-size: 0.85rem;
     padding: 4px 10px;
     border-radius: 14px;
     border: 2px solid var(--ink-black);
@@ -2266,21 +2285,21 @@ h1, h2, h3, h4, .comic-title {
 
   .hero-copy-card {
     width: 100%;
-    max-width: 380px;
-    padding: 20px 16px;
+    max-width: 100%;
+    padding: 18px 14px;
     margin: 0 auto;
     border-radius: 20px;
     box-shadow: var(--comic-shadow);
   }
 
   .hero-copy-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
   }
 
   .hero-copy-desc {
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     line-height: 1.5;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
 
   .hero-button-group {
@@ -2299,291 +2318,595 @@ h1, h2, h3, h4, .comic-title {
 
   .rig-slider-container {
     width: 100%;
-    max-width: 330px;
-    margin: 16px auto 0;
-    padding: 10px 12px;
+    max-width: 320px;
+    margin: 14px auto 0;
+    padding: 8px 12px;
   }
 
-  /* Nobi Family Residence */
+  /* --- Section D: The Nobi Residence --- */
   .nobi-residence-section {
-    padding: 40px 14px;
+    padding: 32px 14px 95px;
   }
 
   .section-header {
-    margin-bottom: 22px;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .section-badge {
+    font-size: 0.76rem;
+    padding: 3px 10px;
   }
 
   .section-title {
-    font-size: clamp(1.8rem, 7vw, 2.6rem);
+    font-size: clamp(1.8rem, 7vw, 2.4rem);
+    margin: 4px 0 8px;
   }
 
-  .section-desc {
-    font-size: 0.92rem;
+  .section-subtitle {
+    font-size: 0.88rem;
+    line-height: 1.45;
   }
 
-  .family-tabs {
+  .family-layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+  }
+
+  /* Tatami Frame & Moves */
+  .tatami-frame-wrapper {
+    padding: 12px;
+    border-radius: 20px;
+    box-shadow: var(--comic-shadow);
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .tatami-main-img {
+    border-radius: 12px;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .tatami-spotlight-dimmer,
+  .tatami-spotlight-beam,
+  .tatami-hotspots-container {
+    inset: 12px;
+    border-radius: 12px;
+  }
+
+  .tatami-spotlight-badge {
+    top: 18px;
+    font-size: 0.74rem;
+    padding: 3px 10px;
+    box-shadow: 2px 2px 0 var(--ink-black);
+    max-width: 85%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .family-action-overlay-stage {
+    inset: 12px;
+    border-radius: 12px;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .family-action-overlay-stage img {
+    max-width: 85%;
+    max-height: 60%;
+    object-fit: contain;
+    margin-top: 4px;
+    box-shadow: var(--comic-shadow-sm);
+  }
+
+  .family-move-speech-bubble {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 8px 12px;
+    font-size: 0.82rem;
+    border-radius: 12px;
+    border: 2px solid var(--ink-black);
+    box-shadow: 2px 2px 0 var(--ink-black);
+    line-height: 1.35;
+    text-align: center;
+  }
+
+  /* Family Character Tabs (Swipeable Horizontal Strip) */
+  .family-bio-column {
+    gap: 14px;
+    width: 100%;
+  }
+
+  .family-tabs-nav {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    gap: 8px;
-    padding: 4px 2px 10px;
-    margin-bottom: 16px;
     scrollbar-width: none;
+    gap: 8px;
+    padding: 2px 2px 8px;
+    margin: 0;
+    width: 100%;
   }
 
-  .family-tabs::-webkit-scrollbar {
+  .family-tabs-nav::-webkit-scrollbar {
     display: none;
   }
 
   .family-tab-btn {
     flex-shrink: 0;
-    padding: 8px 14px;
-    font-size: 0.85rem;
-  }
-
-  .family-portrait-container {
+    padding: 7px 14px;
+    font-size: 0.84rem;
     border-radius: 18px;
-    margin-bottom: 16px;
-    max-height: 270px;
+    white-space: nowrap;
   }
 
-  .family-detail-card {
-    padding: 20px 16px;
+  /* Family Bio Card */
+  .family-bio-card {
+    padding: 18px 16px;
     border-radius: 20px;
     box-shadow: var(--comic-shadow);
+    width: 100%;
   }
 
-  .family-character-name {
-    font-size: 1.5rem;
+  .family-bio-watermark {
+    font-size: 3.8rem;
+    top: 2px;
+    right: 8px;
+    opacity: 0.06;
   }
 
-  .family-character-role {
+  .family-bio-header {
+    margin-bottom: 10px;
+  }
+
+  .family-bio-name {
+    font-size: 1.55rem;
+  }
+
+  .family-bio-role {
     font-size: 0.82rem;
   }
 
-  .family-character-bio {
-    font-size: 0.9rem;
+  .family-bio-desc {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 14px;
   }
 
-  .family-traits-grid {
-    grid-template-columns: 1fr;
+  .family-bio-traits {
+    grid-template-columns: 1fr 1fr;
     gap: 8px;
+    margin-bottom: 16px;
   }
 
-  .btn-family-action {
+  .trait-box {
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    border-radius: 10px;
+  }
+
+  .btn-signature-move {
     width: 100%;
-    justify-content: center;
-    padding: 12px 18px;
-    font-size: 0.92rem;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    border-radius: 16px;
   }
 
-  /* Empty Lot Gang */
+  /* --- Section E: The Empty Lot Gang --- */
   .empty-lot-section {
-    padding: 40px 14px;
+    padding: 32px 14px 95px;
   }
 
-  .empty-lot-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .empty-lot-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .empty-lot-feature-card {
+    position: relative !important;
+    top: auto !important;
+    padding: 16px 14px;
+    border-radius: 20px;
+    box-shadow: var(--comic-shadow);
     gap: 12px;
+    width: 100%;
   }
 
-  .kid-card {
-    padding: 12px;
-    border-radius: 18px;
+  .empty-lot-pipes-img-wrapper {
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  .empty-lot-pipes-img {
+    aspect-ratio: 16 / 10;
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .feature-speech-bubble {
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    border-radius: 10px;
+    line-height: 1.35;
+    border: 2px solid var(--ink-black);
+    box-shadow: 2px 2px 0 var(--ink-black);
+  }
+
+  .empty-lot-feature-content h3 {
+    font-size: 1.45rem;
+    margin-bottom: 4px;
+  }
+
+  .empty-lot-feature-content p {
+    font-size: 0.86rem;
+    line-height: 1.45;
+  }
+
+  /* Empty Lot 2x2 Poke Grid */
+  .empty-lot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+  }
+
+  .poke-kid-card {
+    padding: 10px;
+    border-radius: 16px;
     box-shadow: var(--comic-shadow-sm);
   }
 
-  .kid-card-img-container {
-    height: 140px;
+  .poke-kid-img-wrapper {
+    aspect-ratio: 1 / 1;
+    border-radius: 10px;
     margin-bottom: 8px;
   }
 
-  .kid-card-name {
-    font-size: 1.1rem;
+  .poke-kid-badge {
+    font-size: 0.68rem;
+    padding: 2px 6px;
+    margin-bottom: 4px;
+    border-radius: 8px;
   }
 
-  .kid-card-role {
-    font-size: 0.75rem;
+  .poke-kid-name {
+    font-size: 0.95rem;
+    margin-bottom: 2px;
   }
 
-  .kid-card-reaction {
-    font-size: 0.78rem;
-    padding: 6px 8px;
+  .poke-kid-trait {
+    font-size: 0.72rem;
+    line-height: 1.3;
   }
 
-  /* Air Cannon Gadget Simulator */
-  .cannon-section {
-    padding: 40px 14px;
+  /* --- Section F: Air Cannon --- */
+  .air-cannon-section {
+    padding: 32px 14px 95px;
   }
 
-  .cannon-stage-container {
-    height: 240px;
-    max-width: 100%;
+  .cannon-layout-grid {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .cannon-copy-card {
+    padding: 18px 14px;
     border-radius: 20px;
+    box-shadow: var(--comic-shadow);
+    width: 100%;
+  }
+
+  .cannon-eyebrow {
+    font-size: 0.78rem;
+  }
+
+  .cannon-title {
+    font-size: 1.6rem;
+    margin: 4px 0 8px;
+  }
+
+  .cannon-desc {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    margin-bottom: 14px;
+  }
+
+  .btn-cannon-hold {
+    width: 100%;
+    padding: 14px 18px;
+    font-size: 0.95rem;
+    border-radius: 16px;
+  }
+
+  .cannon-stage-wrapper {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--comic-shadow);
+    width: 100%;
+    max-height: 250px;
+  }
+
+  .cannon-pose-img {
+    aspect-ratio: 16 / 10;
+    max-height: 250px;
+    object-fit: cover;
   }
 
   .cannon-dokan-badge {
-    font-size: clamp(2.2rem, 10vw, 3.2rem);
-    padding: 10px 20px;
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+    padding: 8px 16px;
   }
 
-  .cannon-control-card {
-    padding: 20px 16px;
-    border-radius: 20px;
-    box-shadow: var(--comic-shadow);
-  }
-
-  .cannon-trigger-btn {
-    width: 100%;
-    padding: 16px 20px;
-    font-size: 1.05rem;
-    justify-content: center;
-  }
-
-  /* Neighborhood Polaroids */
-  .polaroids-section {
-    padding: 40px 14px;
+  /* --- Section G: Neighborhood Polaroids --- */
+  .neighborhood-section {
+    padding: 32px 14px 95px;
   }
 
   .polaroid-grid {
-    grid-template-columns: 1fr;
-    max-width: 320px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 24px;
+    max-width: 310px;
+    margin: 0 auto;
   }
 
   .polaroid-card {
     width: 100%;
+    max-width: 290px;
     height: 380px;
   }
 
-  /* Anywhere Door Delivery */
-  .delivery-section {
-    padding: 40px 14px;
+  /* --- Section H: Anywhere Door Delivery --- */
+  .anywhere-door-section {
+    padding: 32px 14px 95px;
   }
 
-  .delivery-stage-container {
-    height: 260px;
-    border-radius: 20px;
+  .delivery-layout-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+  }
+
+  .delivery-video-wrapper {
+    border-radius: 18px;
+    box-shadow: var(--comic-shadow);
+    max-height: 260px;
+  }
+
+  .delivery-video-wrapper video {
+    aspect-ratio: 16 / 10;
+    max-height: 260px;
+    object-fit: cover;
+  }
+
+  .delivery-recipient-badge {
+    font-size: 0.78rem;
+    padding: 4px 10px;
+    top: 10px;
+    left: 10px;
+  }
+
+  .delivery-dialogue-bubble {
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    border-radius: 10px;
   }
 
   .delivery-control-card {
-    padding: 20px 16px;
+    padding: 18px 14px;
     border-radius: 20px;
     box-shadow: var(--comic-shadow);
+    width: 100%;
   }
 
-  .recipient-pills {
+  .delivery-control-card h3 {
+    font-size: 1.35rem;
+  }
+
+  .delivery-control-card p {
+    font-size: 0.86rem;
+  }
+
+  .recipient-pills-row {
+    display: flex;
+    flex-wrap: wrap;
     gap: 6px;
+    margin: 10px 0 14px;
   }
 
   .recipient-pill {
     padding: 6px 12px;
-    font-size: 0.82rem;
+    font-size: 0.8rem;
+    border-radius: 14px;
   }
 
-  .btn-delivery-start {
+  .btn-delivery-deliver,
+  .btn-delivery-copy {
     width: 100%;
+    padding: 12px 16px;
+    font-size: 0.92rem;
+    border-radius: 16px;
     justify-content: center;
   }
 
-  /* 22nd Century Club Form & Footer */
+  /* --- Section I: 22nd Century Club & Footer --- */
   .club-section {
-    padding: 40px 14px;
+    padding: 48px 14px 95px;
   }
 
-  .club-card {
-    padding: 24px 16px;
-    border-radius: 20px;
+  .club-card-container {
     width: 100%;
     max-width: 100%;
+  }
+
+  .club-peeking-dora {
+    width: 110px;
+    top: -50px;
+    right: 18px;
+  }
+
+  .club-polka-card {
+    padding: 24px 16px;
+    border-radius: 22px;
     box-shadow: var(--comic-shadow);
   }
 
-  .club-input-group input,
-  .club-input-group select {
-    font-size: 16px; /* Prevents iOS auto-zoom on input focus */
-    padding: 10px 14px;
+  .club-inner-content h3 {
+    font-size: 1.45rem;
+  }
+
+  .club-inner-content p {
+    font-size: 0.86rem;
+    margin-bottom: 14px;
+  }
+
+  .club-form-row {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+
+  .club-form-row input {
+    width: 100%;
+    font-size: 16px; /* iOS zoom prevention */
+    padding: 12px 14px;
+    border-radius: 14px;
+  }
+
+  .club-form-row button {
+    width: 100%;
+    padding: 12px 18px;
+    font-size: 0.95rem;
+    border-radius: 14px;
+    justify-content: center;
   }
 
   .site-footer {
-    padding: 40px 14px 100px;
+    padding: 36px 14px 110px;
   }
 
   .footer-content-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
     text-align: center;
   }
 
   .footer-brand {
     align-items: center;
-    justify-content: center;
   }
 
-  /* Bottom Floating Controls: Narrator Pill & Mini-Dora Mascot */
+  .footer-brand h2 {
+    font-size: 1.7rem;
+  }
+
+  .footer-brand p {
+    font-size: 0.86rem;
+  }
+
+  /* --- Fixed Bottom HUD: Narrator Pill & Mini-Dora --- */
   .narrator-pill-container {
     position: fixed;
-    bottom: 12px;
-    left: 12px;
-    right: 74px;
-    transform: none;
-    width: auto;
-    max-width: calc(100% - 86px);
+    bottom: 10px;
+    left: 10px;
+    right: 64px;
+    max-width: calc(100% - 74px);
     z-index: 999;
+    pointer-events: none;
+    transform: none;
   }
 
   .narrator-pill {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 0.8rem;
-    gap: 8px;
-    box-shadow: 2px 2px 0 var(--ink-black);
+    pointer-events: auto;
+    padding: 6px 12px;
+    font-size: 0.74rem;
+    font-weight: 800;
+    gap: 6px;
+    border-radius: 20px;
     border: 2px solid var(--ink-black);
+    box-shadow: 2px 2px 0 var(--ink-black);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    display: inline-flex;
+    align-items: center;
+    background: white;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .narrator-pill.minimized {
+    opacity: 0.35;
+    transform: scale(0.9);
   }
 
   .narrator-icon {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+  }
+
+  #narrator-pill-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .footer-mini-dora-container {
-    bottom: 10px;
-    right: 10px;
+    bottom: 8px;
+    right: 8px;
     z-index: 1000;
   }
 
   .footer-mini-dora {
-    width: 52px;
-    height: 52px;
-    box-shadow: 2px 2px 0 var(--ink-black);
+    width: 48px;
+    height: 48px;
     border: 2px solid var(--ink-black);
+    box-shadow: 2px 2px 0 var(--ink-black);
   }
 
   .mini-dora-bubble {
-    top: -30px;
-    right: 4px;
-    font-size: 0.72rem;
-    padding: 2px 8px;
+    top: -26px;
+    right: 2px;
+    font-size: 0.7rem;
+    padding: 2px 6px;
   }
 
   /* Opening Preloader on Mobile */
   .dora-preloader-card {
-    padding: 26px 18px;
-    width: 92%;
-    max-width: 360px;
+    padding: 24px 16px;
+    width: 90%;
+    max-width: 340px;
     border-radius: 22px;
     box-shadow: 6px 6px 0 var(--ink-black);
   }
 
   .dora-preloader-bell-ring {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 10px;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 8px;
   }
 
   .preloader-title {
-    font-size: 1.75rem;
+    font-size: 1.65rem;
   }
 
   .preloader-sub {
@@ -2591,18 +2914,18 @@ h1, h2, h3, h4, .comic-title {
   }
 
   .preloader-desc {
-    font-size: 0.82rem;
-    margin: 6px 0 16px;
+    font-size: 0.8rem;
+    margin: 6px 0 14px;
   }
 
   .preloader-enter-btn {
-    padding: 12px 18px;
-    font-size: 1rem;
+    padding: 12px 16px;
+    font-size: 0.95rem;
     border-radius: 14px;
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 420px) {
   .site-navbar {
     padding: 8px 10px;
   }
@@ -2619,12 +2942,25 @@ h1, h2, h3, h4, .comic-title {
     display: none;
   }
 
-  .empty-lot-grid {
+  .hero-main-title {
+    font-size: 2.1rem;
+  }
+
+  .family-bio-traits {
     grid-template-columns: 1fr;
   }
 
-  .hero-main-title {
-    font-size: 2.2rem;
+  .empty-lot-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .poke-kid-card {
+    padding: 8px;
+  }
+
+  .poke-kid-name {
+    font-size: 0.88rem;
   }
 }
 

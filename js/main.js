@@ -337,6 +337,10 @@ function initNarratorPill() {
     const el = document.getElementById(sec.id);
     if (el) observer.observe(el);
   });
+
+  pill.addEventListener("click", () => {
+    pill.classList.toggle("minimized");
+  });
 }
 
 /**

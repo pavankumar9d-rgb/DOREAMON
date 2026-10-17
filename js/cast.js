@@ -45,6 +45,17 @@ class CastController {
       moveBtn.addEventListener("click", () => this.triggerSignatureMove());
     }
 
+    const overlayStage = document.getElementById("family-action-overlay-stage");
+    const moveSpeech = document.getElementById("family-move-bubble");
+    const tatamiWrapper = document.getElementById("tatami-frame-wrapper");
+    if (overlayStage) {
+      overlayStage.addEventListener("click", () => {
+        overlayStage.classList.remove("active");
+        if (moveSpeech) moveSpeech.classList.remove("show");
+        if (tatamiWrapper) tatamiWrapper.classList.remove("action-active");
+      });
+    }
+
     this.selectFamilyMember(0);
   }
 
@@ -93,6 +104,7 @@ class CastController {
     const overlayImg = document.getElementById("family-action-overlay-img");
     const overlayStage = document.getElementById("family-action-overlay-stage");
     if (overlayStage) overlayStage.classList.remove("active");
+    if (tatamiWrapper) tatamiWrapper.classList.remove("action-active");
   }
 
   triggerSignatureMove() {
@@ -110,6 +122,10 @@ class CastController {
 
     if (overlayStage) {
       overlayStage.classList.add("active");
+    }
+
+    if (tatamiWrapper) {
+      tatamiWrapper.classList.add("action-active");
     }
 
     if (moveSpeech) {

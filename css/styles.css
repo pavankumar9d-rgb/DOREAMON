@@ -2170,11 +2170,10 @@ h1, h2, h3, h4, .comic-title {
   /* Mobile Horizontal Quick-Nav Scroll Strip */
   .mobile-subnav {
     display: block;
-    position: sticky;
-    top: 55px;
-    z-index: 998;
-    background: rgba(253, 248, 236, 0.96);
-    backdrop-filter: blur(8px);
+    position: relative;
+    top: auto;
+    z-index: 10;
+    background: rgba(253, 248, 236, 0.98);
     border-bottom: var(--border-medium);
     padding: 6px 12px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
@@ -2216,7 +2215,7 @@ h1, h2, h3, h4, .comic-title {
     transform: translateY(-1px);
   }
 
-  /* Global section clearance for bottom fixed HUD (Narrator Pill & Mini-Dora) */
+  /* Balanced Section Spacing on Mobile */
   .hero-section,
   .nobi-residence-section,
   .empty-lot-section,
@@ -2224,12 +2223,12 @@ h1, h2, h3, h4, .comic-title {
   .neighborhood-section,
   .anywhere-door-section,
   .club-section {
-    padding-bottom: 95px !important;
+    padding-bottom: 36px;
   }
 
   /* Hero Section */
   .hero-section {
-    padding: 20px 14px 95px;
+    padding: 16px 14px 36px;
     min-height: auto;
   }
 
@@ -2500,57 +2499,59 @@ h1, h2, h3, h4, .comic-title {
 
   /* --- Section E: The Empty Lot Gang --- */
   .empty-lot-section {
-    padding: 32px 14px 95px;
+    padding: 24px 14px 36px;
   }
 
   .empty-lot-layout {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 14px;
     width: 100%;
   }
 
   .empty-lot-feature-card {
     position: relative !important;
     top: auto !important;
-    padding: 16px 14px;
-    border-radius: 20px;
+    padding: 12px 10px;
+    border-radius: 18px;
     box-shadow: var(--comic-shadow);
-    gap: 12px;
+    gap: 8px;
     width: 100%;
   }
 
   .empty-lot-pipes-img-wrapper {
     border-radius: 12px;
     overflow: hidden;
+    position: relative;
   }
 
   .empty-lot-pipes-img {
-    aspect-ratio: 16 / 10;
-    max-height: 200px;
+    aspect-ratio: 16 / 9;
+    max-height: 140px;
     object-fit: cover;
+    width: 100%;
   }
 
   .feature-speech-bubble {
-    bottom: 6px;
-    left: 6px;
-    right: 6px;
-    padding: 6px 10px;
-    font-size: 0.78rem;
-    border-radius: 10px;
-    line-height: 1.35;
-    border: 2px solid var(--ink-black);
-    box-shadow: 2px 2px 0 var(--ink-black);
+    bottom: 4px;
+    left: 4px;
+    right: 4px;
+    padding: 4px 8px;
+    font-size: 0.72rem;
+    border-radius: 8px;
+    line-height: 1.25;
+    border: 1.5px solid var(--ink-black);
+    box-shadow: 1.5px 1.5px 0 var(--ink-black);
   }
 
   .empty-lot-feature-content h3 {
-    font-size: 1.45rem;
-    margin-bottom: 4px;
+    font-size: 1.15rem;
+    margin-bottom: 2px;
   }
 
   .empty-lot-feature-content p {
-    font-size: 0.86rem;
-    line-height: 1.45;
+    font-size: 0.78rem;
+    line-height: 1.35;
   }
 
   /* Empty Lot 2x2 Poke Grid */
@@ -2559,35 +2560,37 @@ h1, h2, h3, h4, .comic-title {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     width: 100%;
+    margin-top: 2px;
   }
 
   .poke-kid-card {
-    padding: 10px;
-    border-radius: 16px;
+    padding: 10px 8px;
+    border-radius: 14px;
     box-shadow: var(--comic-shadow-sm);
   }
 
   .poke-kid-img-wrapper {
     aspect-ratio: 1 / 1;
+    max-height: 105px;
     border-radius: 10px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
 
   .poke-kid-badge {
-    font-size: 0.68rem;
-    padding: 2px 6px;
-    margin-bottom: 4px;
+    font-size: 0.65rem;
+    padding: 2px 5px;
+    margin-bottom: 3px;
     border-radius: 8px;
   }
 
   .poke-kid-name {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     margin-bottom: 2px;
   }
 
   .poke-kid-trait {
-    font-size: 0.72rem;
-    line-height: 1.3;
+    font-size: 0.7rem;
+    line-height: 1.25;
   }
 
   /* --- Section F: Air Cannon --- */
@@ -2672,84 +2675,100 @@ h1, h2, h3, h4, .comic-title {
 
   /* --- Section H: Anywhere Door Delivery --- */
   .anywhere-door-section {
-    padding: 32px 14px 95px;
+    padding: 24px 14px 36px;
   }
 
   .delivery-layout-grid {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 14px;
     width: 100%;
   }
 
   .delivery-video-wrapper {
-    border-radius: 18px;
+    border-radius: 16px;
     box-shadow: var(--comic-shadow);
-    max-height: 260px;
+    max-height: 200px;
   }
 
   .delivery-video-wrapper video {
-    aspect-ratio: 16 / 10;
-    max-height: 260px;
+    aspect-ratio: 16 / 9;
+    max-height: 200px;
     object-fit: cover;
   }
 
   .delivery-recipient-badge {
-    font-size: 0.78rem;
-    padding: 4px 10px;
-    top: 10px;
-    left: 10px;
+    font-size: 0.75rem;
+    padding: 3px 8px;
+    top: 8px;
+    left: 8px;
   }
 
   .delivery-dialogue-bubble {
-    bottom: 8px;
-    left: 8px;
-    right: 8px;
-    font-size: 0.8rem;
-    padding: 6px 10px;
-    border-radius: 10px;
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    font-size: 0.76rem;
+    padding: 5px 8px;
+    border-radius: 8px;
   }
 
   .delivery-control-card {
-    padding: 18px 14px;
-    border-radius: 20px;
+    padding: 16px 12px;
+    border-radius: 18px;
     box-shadow: var(--comic-shadow);
     width: 100%;
   }
 
   .delivery-control-card h3 {
-    font-size: 1.35rem;
+    font-size: 1.25rem;
+    margin-bottom: 4px;
   }
 
   .delivery-control-card p {
-    font-size: 0.86rem;
+    font-size: 0.82rem;
+    margin-bottom: 8px;
   }
 
   .recipient-pills-row {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin: 10px 0 14px;
+    margin: 8px 0 12px;
   }
 
   .recipient-pill {
-    padding: 6px 12px;
-    font-size: 0.8rem;
-    border-radius: 14px;
+    padding: 5px 10px;
+    font-size: 0.78rem;
+    border-radius: 12px;
   }
 
   .btn-delivery-deliver,
   .btn-delivery-copy {
     width: 100%;
-    padding: 12px 16px;
-    font-size: 0.92rem;
-    border-radius: 16px;
+    padding: 11px 14px;
+    font-size: 0.88rem;
+    border-radius: 14px;
     justify-content: center;
+    margin-bottom: 6px;
+  }
+
+  .delivery-status-text {
+    text-align: center;
+    font-weight: 800;
+    font-size: 0.82rem;
+    color: var(--dora-blue-deep);
+    background: var(--dora-blue-light);
+    border: 1.5px solid var(--ink-black);
+    box-shadow: 2px 2px 0 var(--ink-black);
+    border-radius: 10px;
+    padding: 8px 10px;
+    margin-top: 8px;
   }
 
   /* --- Section I: 22nd Century Club & Footer --- */
   .club-section {
-    padding: 48px 14px 95px;
+    padding: 36px 14px 36px;
   }
 
   .club-card-container {
@@ -2800,7 +2819,7 @@ h1, h2, h3, h4, .comic-title {
   }
 
   .site-footer {
-    padding: 36px 14px 110px;
+    padding: 36px 14px 60px;
   }
 
   .footer-content-grid {
@@ -2822,63 +2841,20 @@ h1, h2, h3, h4, .comic-title {
     font-size: 0.86rem;
   }
 
-  /* --- Fixed Bottom HUD: Narrator Pill & Mini-Dora --- */
+  /* --- Bottom Mobile HUD: Hide Fixed Narrator Pill (Prevents Screen Covering) --- */
   .narrator-pill-container {
-    position: fixed;
-    bottom: 10px;
-    left: 10px;
-    right: 64px;
-    max-width: calc(100% - 74px);
-    z-index: 999;
-    pointer-events: none;
-    transform: none;
-  }
-
-  .narrator-pill {
-    pointer-events: auto;
-    padding: 6px 12px;
-    font-size: 0.74rem;
-    font-weight: 800;
-    gap: 6px;
-    border-radius: 20px;
-    border: 2px solid var(--ink-black);
-    box-shadow: 2px 2px 0 var(--ink-black);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-    display: inline-flex;
-    align-items: center;
-    background: white;
-    cursor: pointer;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-
-  .narrator-pill.minimized {
-    opacity: 0.35;
-    transform: scale(0.9);
-  }
-
-  .narrator-icon {
-    font-size: 0.95rem;
-    flex-shrink: 0;
-  }
-
-  #narrator-pill-text {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    display: none !important;
   }
 
   .footer-mini-dora-container {
-    bottom: 8px;
-    right: 8px;
+    bottom: 12px;
+    right: 12px;
     z-index: 1000;
   }
 
   .footer-mini-dora {
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border: 2px solid var(--ink-black);
     box-shadow: 2px 2px 0 var(--ink-black);
   }

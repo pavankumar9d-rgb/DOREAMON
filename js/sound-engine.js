@@ -532,150 +532,30 @@ class AnimeSoundEngine {
     osc.stop(t + 0.85);
   }
 
-  // --- 14. Character Voice System (Real Audio + Procedural Fallback) ---
-  playRealAudio(charId) {
-    if (this.isMuted) return Promise.reject("muted");
-    return new Promise((resolve, reject) => {
-      const audio = new Audio(`assets/audio/${charId}.mp3`);
-      audio.volume = 0.95;
-      audio.onended = () => resolve(true);
-      audio.onerror = () => reject("audio_not_found");
-      const playPromise = audio.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => resolve(true)).catch(reject);
-      }
-    });
-  }
-
-  speakCharacter(charId) {
+  // --- 14. Doraemon Opening / Preloader Music Player ---
+  playIntroMusic() {
     if (this.isMuted) return;
-    this.ensureContext();
-
-    // Try real audio recording first (e.g. assets/audio/doraemon.mp3)
-    this.playRealAudio(charId).catch(() => {
-      this.synthesizeCharacterVoice(charId);
-    });
+    try {
+      if (!this.introAudio) {
+        this.introAudio = new Audio("assets/doraemon-sms.mp3");
+        this.introAudio.volume = 0.85;
+      }
+      this.introAudio.currentTime = 0;
+      const p = this.introAudio.play();
+      if (p !== undefined) {
+        p.catch(e => console.log("Intro audio autoplay handled:", e));
+      }
+    } catch (e) {
+      console.warn("Could not play intro music", e);
+    }
   }
 
-  synthesizeCharacterVoice(charId) {
-    const SCRIPTS = {
-      shizuka: {
-        ja: "こんにちは、のび太さん！",
-        en: "Hello, Nobita-san!",
-        pitch: 1.45,
-        rate: 1.05,
-        toneNotes: [523.25, 659.25, 783.99],
-        wave: "sine"
-      },
-      gian: {
-        ja: "おれはジャイアン！こんにちは！",
-        en: "I am Gian! What's yours is mine!",
-        pitch: 0.65,
-        rate: 0.95,
-        toneNotes: [146.83, 196.00, 220.00],
-        wave: "sawtooth"
-      },
-      suneo: {
-        ja: "やあ、のび太！スネ夫だよ！",
-        en: "Hey Nobita! Look at my new toy!",
-        pitch: 1.3,
-        rate: 1.2,
-        toneNotes: [440.00, 554.37, 659.25],
-        wave: "triangle"
-      },
-      dekisugi: {
-        ja: "こんにちは、のび太くん！一緒に勉強しよう！",
-        en: "Hello Nobita-kun! Let's study together!",
-        pitch: 1.08,
-        rate: 1.0,
-        toneNotes: [392.00, 493.88, 587.33],
-        wave: "sine"
-      },
-      doraemon: {
-        ja: "ぼく、ドラえもん！こんにちは！",
-        en: "Hello! I am Doraemon!",
-        pitch: 1.25,
-        rate: 1.1,
-        toneNotes: [440.00, 523.25, 659.25],
-        wave: "sine"
-      },
-      nobita: {
-        ja: "ドラえも〜ん！助けてよ〜！",
-        en: "Doraemon! Help me out!",
-        pitch: 1.12,
-        rate: 0.95,
-        toneNotes: [329.63, 392.00, 329.63],
-        wave: "triangle"
-      },
-      dorami: {
-        ja: "こんにちは！ドラミだよ！",
-        en: "Hello! I am Dorami!",
-        pitch: 1.48,
-        rate: 1.12,
-        toneNotes: [587.33, 698.46, 880.00],
-        wave: "sine"
-      },
-      tamako: {
-        ja: "のび太！また０点取ったのね！",
-        en: "Nobita! Did you get another zero?!",
-        pitch: 0.92,
-        rate: 1.05,
-        toneNotes: [261.63, 293.66, 329.63],
-        wave: "sawtooth"
-      },
-      nobisuke: {
-        ja: "わっはっは！のび太、元気かい？",
-        en: "Hahaha! Nobita, how are you doing?",
-        pitch: 0.72,
-        rate: 0.92,
-        toneNotes: [130.81, 164.81, 196.00],
-        wave: "sine"
-      }
-    };
-
-    const cfg = SCRIPTS[charId];
-    if (!cfg) return;
-
-    // A. Procedural melodic character voice chord
-    if (this.ctx) {
-      const now = this.ctx.currentTime;
-      cfg.toneNotes.forEach((f, idx) => {
-        const osc = this.ctx.createOscillator();
-        const gain = this.ctx.createGain();
-        osc.type = cfg.wave || "sine";
-        osc.frequency.setValueAtTime(f, now + idx * 0.08);
-        gain.gain.setValueAtTime(0.18, now + idx * 0.08);
-        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.22);
-        osc.connect(gain);
-        gain.connect(this.ctx.destination);
-        osc.start(now + idx * 0.08);
-        osc.stop(now + idx * 0.08 + 0.26);
-      });
-    }
-
-    // B. Native browser speech synthesis
-    if (typeof window !== "undefined" && "speechSynthesis" in window) {
+  stopIntroMusic() {
+    if (this.introAudio) {
       try {
-        window.speechSynthesis.cancel();
-        if (!this.voices || this.voices.length === 0) {
-          this.voices = window.speechSynthesis.getVoices() || [];
-        }
-        const jaVoice = this.voices.find(v => v.lang && (v.lang.startsWith("ja") || v.lang.includes("JP")));
-        const text = jaVoice ? cfg.ja : cfg.en;
-        const utter = new SpeechSynthesisUtterance(text);
-        if (jaVoice) {
-          utter.voice = jaVoice;
-          utter.lang = "ja-JP";
-        } else {
-          utter.lang = "en-US";
-        }
-        utter.pitch = cfg.pitch;
-        utter.rate = cfg.rate;
-        utter.volume = 1;
-        window.speechSynthesis.speak(utter);
-      } catch (err) {
-        console.warn("Speech synthesis error", err);
-      }
+        this.introAudio.pause();
+        this.introAudio.currentTime = 0;
+      } catch (e) {}
     }
   }
 }

@@ -8,6 +8,9 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
+  // 0. 22nd Century Opening Comic Preloader & Music
+  initPreloader();
+
   // 1. Initialize Rig, Cast, and Delivery Controllers
   const rig = new DoraemonRig();
   const cast = new CastController();
@@ -385,3 +388,61 @@ function initMiniDora() {
     }
   });
 }
+
+/**
+ * 22nd Century Opening Comic Preloader
+ */
+function initPreloader() {
+  const preloader = document.getElementById("dora-preloader");
+  const progressBar = document.getElementById("preloader-progress-bar");
+  const enterBtn = document.getElementById("preloader-enter-btn");
+  const statusText = document.getElementById("preloader-status");
+  if (!preloader) return;
+
+  let progress = 0;
+  let entered = false;
+
+  const dismiss = () => {
+    if (entered) return;
+    entered = true;
+    if (window.soundEngine) {
+      window.soundEngine.ensureContext();
+      window.soundEngine.playIntroMusic();
+    }
+    preloader.classList.add("fade-out");
+    setTimeout(() => {
+      preloader.remove();
+    }, 600);
+  };
+
+  if (enterBtn) {
+    enterBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      dismiss();
+    });
+  }
+
+  preloader.addEventListener("click", () => {
+    dismiss();
+  });
+
+  const interval = setInterval(() => {
+    progress += Math.random() * 24 + 10;
+    if (progress >= 100) {
+      progress = 100;
+      clearInterval(interval);
+      if (progressBar) progressBar.style.width = "100%";
+      if (statusText) statusText.textContent = "4D Pocket Synchronized! Ready to Enter!";
+      if (enterBtn) {
+        enterBtn.classList.add("pulse");
+        enterBtn.focus();
+      }
+    } else {
+      if (progressBar) progressBar.style.width = `${progress}%`;
+      if (progress > 55 && statusText) {
+        statusText.textContent = "Summoning Anywhere Door & Take-Copter...";
+      }
+    }
+  }, 85);
+}
+

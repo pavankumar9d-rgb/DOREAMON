@@ -18,6 +18,34 @@
     <rect width="100%" height="100%" filter="url(#paper-noise)" />
   </svg>
 
+  <!-- 22nd Century Opening Comic Preloader -->
+  <div id="dora-preloader" class="dora-preloader" role="dialog" aria-modal="true" aria-label="Loading Doraemon Experience">
+    <div class="dora-preloader-backdrop"></div>
+    <div class="dora-preloader-card">
+      <div class="dora-preloader-bell-ring">
+        <svg class="preloader-bell-svg" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="38" fill="#FFD700" stroke="#1C1917" stroke-width="6"/>
+          <rect x="20" y="38" width="60" height="10" rx="5" fill="#E60012" stroke="#1C1917" stroke-width="5"/>
+          <circle cx="50" cy="58" r="8" fill="#1C1917"/>
+          <line x1="50" y1="66" x2="50" y2="84" stroke="#1C1917" stroke-width="6"/>
+          <circle cx="50" cy="18" r="6" fill="#D4AF37" stroke="#1C1917" stroke-width="4"/>
+        </svg>
+      </div>
+      <h2 class="preloader-title">Doraemon <span class="preloader-sub">ドラえもん</span></h2>
+      <p id="preloader-status" class="preloader-desc">Initializing 22nd-Century Gadget Network...</p>
+      
+      <div class="preloader-progress-track">
+        <div id="preloader-progress-bar" class="preloader-progress-bar"></div>
+      </div>
+      
+      <button id="preloader-enter-btn" class="preloader-enter-btn" type="button">
+        <span class="btn-icon">🚪</span>
+        <span class="btn-text">Enter Doraemon's World</span>
+      </button>
+      <p class="preloader-hint">🎵 Click to enter & play the Doraemon theme</p>
+    </div>
+  </div>
+
   <!-- Sticky Top Comic Navbar -->
   <header class="site-navbar">
     <a href="#hero-section" class="nav-brand">

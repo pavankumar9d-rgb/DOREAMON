@@ -2106,3 +2106,142 @@ h1, h2, h3, h4, .comic-title {
     display: none;
   }
 }
+
+/* ==========================================================================
+   22nd Century Opening Comic Preloader
+   ========================================================================== */
+.dora-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), 
+              visibility 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dora-preloader.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.dora-preloader-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, #00A0E9 0%, #0068B7 60%, #003B73 100%);
+  opacity: 0.98;
+}
+
+.dora-preloader-card {
+  position: relative;
+  z-index: 2;
+  background: #FFFDF8;
+  border: 4px solid var(--ink-black);
+  border-radius: 28px;
+  box-shadow: 10px 10px 0 var(--ink-black);
+  padding: 38px 42px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  animation: preloaderCardPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes preloaderCardPop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.dora-preloader-bell-ring {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 16px;
+  filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.25));
+  animation: bellSway 1.8s infinite ease-in-out;
+}
+
+@keyframes bellSway {
+  0%, 100% { transform: rotate(-7deg); }
+  50% { transform: rotate(7deg); }
+}
+
+.preloader-bell-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.preloader-title {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #00A0E9;
+  margin: 0 0 6px;
+  text-shadow: 2px 2px 0 var(--ink-black);
+}
+
+.preloader-sub {
+  color: #E60012;
+  font-size: 1.2rem;
+  display: block;
+}
+
+.preloader-desc {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink-black);
+  margin: 8px 0 20px;
+}
+
+.preloader-progress-track {
+  width: 100%;
+  height: 14px;
+  background: #EAE6DF;
+  border: 3px solid var(--ink-black);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.preloader-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #FFD700 0%, #E60012 50%, #00A0E9 100%);
+  border-radius: 999px;
+  transition: width 0.15s ease-out;
+}
+
+.preloader-enter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px 24px;
+  background: #FFD700;
+  color: var(--ink-black);
+  border: 3px solid var(--ink-black);
+  border-radius: 18px;
+  box-shadow: 4px 4px 0 var(--ink-black);
+  font-size: 1.15rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.preloader-enter-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--ink-black);
+  background: #FFE033;
+}
+
+.preloader-enter-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--ink-black);
+}
+
+.preloader-hint {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 600;
+  margin-top: 14px;
+}

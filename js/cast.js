@@ -23,10 +23,7 @@ class CastController {
         tabButtons.forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
         this.selectFamilyMember(index);
-        const member = NOBI_FAMILY[index];
-        if (member && window.soundEngine) {
-          window.soundEngine.speakCharacter(member.id);
-        }
+        if (window.soundEngine) window.soundEngine.playPoke();
       });
     });
 
@@ -38,10 +35,7 @@ class CastController {
         if (!isNaN(idx)) {
           tabButtons.forEach((b, i) => b.classList.toggle("active", i === idx));
           this.selectFamilyMember(idx);
-          const member = NOBI_FAMILY[idx];
-          if (member && window.soundEngine) {
-            window.soundEngine.speakCharacter(member.id);
-          }
+          if (window.soundEngine) window.soundEngine.playPoke();
         }
       });
     });
@@ -201,20 +195,13 @@ class CastController {
       }
 
       if (charId === "gian") {
-        if (window.soundEngine) {
-          window.soundEngine.speakCharacter("gian");
-          setTimeout(() => {
-            if (window.soundEngine) window.soundEngine.playGianSinging();
-          }, 650);
-        }
+        if (window.soundEngine) window.soundEngine.playGianSinging();
         if (gridContainer) {
           gridContainer.classList.add("gian-earthquake");
           setTimeout(() => gridContainer.classList.remove("gian-earthquake"), 1200);
         }
       } else {
-        if (window.soundEngine) {
-          window.soundEngine.speakCharacter(charId);
-        }
+        if (window.soundEngine) window.soundEngine.playPoke();
       }
     };
 

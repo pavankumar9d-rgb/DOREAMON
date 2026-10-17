@@ -1,3 +1,14 @@
 # Ignored source asset archive and prompt notes
 Assests/
 PROMPT.txt
+
+# Videos and Recordings (never pushed to git)
+*.mp4
+*.webm
+*.avi
+*.mov
+recordings/
+videos/
+
+# Dev tooling
+node_modules/

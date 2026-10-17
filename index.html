@@ -274,8 +274,24 @@
         <div class="empty-lot-layout">
           <!-- Left Feature Card: Laughing on Pipes Scene -->
           <div class="empty-lot-feature-card">
-            <div class="empty-lot-pipes-img-wrapper">
+            <div id="empty-lot-pipes-wrapper" class="empty-lot-pipes-img-wrapper">
               <img class="empty-lot-pipes-img" src="assets/Doraemon_characters_laughing_tog._20261017095845.jpg" alt="Doraemon gang laughing together on pipes" onerror="handleAssetError(this, 'Doraemon_characters_laughing_tog._20261017095845.jpg')">
+
+              <!-- Theatrical Spotlight & Dimming for Empty Lot Gang -->
+              <div id="empty-lot-spotlight-dimmer" class="empty-lot-spotlight-dimmer" aria-hidden="true"></div>
+              <div id="empty-lot-spotlight-beam" class="empty-lot-spotlight-beam" aria-hidden="true"></div>
+              <div id="empty-lot-spotlight-badge" class="empty-lot-spotlight-badge" aria-hidden="true">
+                <span id="empty-lot-spotlight-badge-text">Takeshi 'Gian' Gouda</span>
+              </div>
+
+              <!-- Hotspot clicks directly on the pipe characters -->
+              <div class="empty-lot-hotspots-container">
+                <button type="button" class="empty-lot-hotspot" data-char="shizuka" style="left: 31%; top: 38%; width: 3.5%; height: 22%;" title="Spotlight Shizuka"></button>
+                <button type="button" class="empty-lot-hotspot" data-char="gian" style="left: 33.5%; top: 36%; width: 4%; height: 24%;" title="Spotlight Gian"></button>
+                <button type="button" class="empty-lot-hotspot" data-char="suneo" style="left: 36.5%; top: 38%; width: 3.5%; height: 22%;" title="Spotlight Suneo"></button>
+                <button type="button" class="empty-lot-hotspot" data-char="dekisugi" style="left: 39%; top: 38%; width: 3.5%; height: 22%;" title="Spotlight Dekisugi"></button>
+              </div>
+
               <div id="empty-lot-feature-bubble" class="feature-speech-bubble">
                 "Poke any card on the right to hear from the gang!"
               </div>

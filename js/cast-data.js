@@ -86,7 +86,8 @@ const EMPTY_LOT_GANG = [
     badge: "YAKI-IMO! 🍠",
     popText: "Warm sweet potato fresh from the fire! Please don't tell the boys!",
     imgKey: "shizukaPotato",
-    doodle: "🍠"
+    doodle: "🍠",
+    spotlight: { x: "32.5%", y: "47%", rx: "6%", ry: "12%", badge: "Shizuka Minamoto 源静香" }
   },
   {
     id: "gian",
@@ -97,7 +98,8 @@ const EMPTY_LOT_GANG = [
     badge: "BOE~!! 🎤",
     popText: "MY VOICE IS PURE SOUL! LISTEN TO MY 3-HOUR RECITAL!!",
     imgKey: "gianConcert",
-    doodle: "🎤"
+    doodle: "🎤",
+    spotlight: { x: "35%", y: "46%", rx: "6.5%", ry: "13%", badge: "Takeshi 'Gian' Gouda 剛田武" }
   },
   {
     id: "suneo",
@@ -108,7 +110,8 @@ const EMPTY_LOT_GANG = [
     badge: "VIP RC JET! ✈️",
     popText: "Sorry Nobita, this high-end yacht trip only has seats for three!",
     imgKey: "suneoAirplane",
-    doodle: "✈️"
+    doodle: "✈️",
+    spotlight: { x: "37.5%", y: "47%", rx: "6%", ry: "12%", badge: "Suneo Honekawa 骨川スネ夫" }
   },
   {
     id: "dekisugi",
@@ -119,7 +122,8 @@ const EMPTY_LOT_GANG = [
     badge: "100 PTS! ✨",
     popText: "I finished summarizing the astronomy chapter. Would you like to study together, Nobita?",
     imgKey: "dekisugiBook",
-    doodle: "📚"
+    doodle: "📚",
+    spotlight: { x: "40%", y: "47%", rx: "6%", ry: "12%", badge: "Hidetoshi Dekisugi 出木杉英才" }
   }
 ];
 

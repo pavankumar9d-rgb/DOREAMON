@@ -1078,6 +1078,130 @@ h1, h2, h3, h4, .comic-title {
   box-shadow: var(--comic-shadow);
   background: white;
   margin-bottom: 0;
+  --spot-x: 35%;
+  --spot-y: 46%;
+  --spot-rx: 6.5%;
+  --spot-ry: 13%;
+}
+
+/* Empty Lot Theatrical Spotlight & Dimming */
+.empty-lot-spotlight-dimmer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  background: radial-gradient(
+    ellipse var(--spot-rx, 6.5%) var(--spot-ry, 13%) at var(--spot-x, 35%) var(--spot-y, 46%),
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0) 65%,
+    rgba(10, 8, 20, 0.45) 86%,
+    rgba(10, 8, 20, 0.8) 100%
+  );
+  transition: opacity 0.4s ease, background 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.empty-lot-pipes-img-wrapper.has-spotlight .empty-lot-spotlight-dimmer {
+  opacity: 1;
+}
+
+.empty-lot-spotlight-beam {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 5;
+  opacity: 0;
+  background: 
+    linear-gradient(
+      180deg,
+      rgba(255, 245, 180, 0.22) 0%,
+      rgba(255, 230, 120, 0.08) 45%,
+      transparent 100%
+    ),
+    radial-gradient(
+      ellipse calc(var(--spot-rx, 6.5%) * 1.35) calc(var(--spot-ry, 13%) * 1.35) at var(--spot-x, 35%) var(--spot-y, 46%),
+      rgba(255, 245, 160, 0.42) 0%,
+      rgba(255, 215, 0, 0.22) 55%,
+      transparent 100%
+    );
+  mix-blend-mode: screen;
+  transition: opacity 0.4s ease, background 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.empty-lot-pipes-img-wrapper.has-spotlight .empty-lot-spotlight-beam {
+  opacity: 1;
+}
+
+.empty-lot-spotlight-badge {
+  position: absolute;
+  left: var(--spot-x, 35%);
+  top: max(10px, calc(var(--spot-y, 46%) - var(--spot-ry, 13%) - 26px));
+  transform: translateX(-50%);
+  z-index: 8;
+  pointer-events: none;
+  background: var(--dora-bell-gold);
+  color: var(--ink-black);
+  border: var(--border-medium);
+  box-shadow: var(--comic-shadow-sm);
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 900;
+  white-space: nowrap;
+  opacity: 0;
+  transition: left 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              top 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              opacity 0.3s ease;
+  animation: spotlightBadgeFloat 2s infinite ease-in-out;
+}
+
+.empty-lot-spotlight-badge::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px 4px 0 4px;
+  border-style: solid;
+  border-color: var(--ink-black) transparent transparent transparent;
+}
+
+.empty-lot-pipes-img-wrapper.has-spotlight .empty-lot-spotlight-badge {
+  opacity: 1;
+}
+
+.empty-lot-hotspots-container {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.empty-lot-hotspot {
+  position: absolute;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+  border-radius: 50%;
+  outline: none;
+}
+
+.empty-lot-hotspot:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* Card dimming when a kid card is selected */
+.empty-lot-grid.has-active-poke .poke-kid-card:not(.active-poke) {
+  opacity: 0.55;
+  filter: grayscale(15%);
+  transform: scale(0.98);
+}
+
+.poke-kid-card.active-poke {
+  border-color: var(--dora-blue);
+  box-shadow: 0 0 0 3px var(--dora-bell-gold), var(--comic-shadow-lg);
+  transform: translateY(-4px) scale(1.02);
 }
 
 .empty-lot-pipes-img {

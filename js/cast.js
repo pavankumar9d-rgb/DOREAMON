@@ -150,41 +150,76 @@ class CastController {
     }
   }
 
-  // --- B. Empty Lot Poke Cards ---
+  // --- B. Empty Lot Poke Cards & Pipe Spotlight ---
   initEmptyLotPokeCards() {
     const cards = document.querySelectorAll(".poke-kid-card");
     const featureSpeech = document.getElementById("empty-lot-feature-bubble");
     const gridContainer = document.getElementById("empty-lot-grid");
+    const pipesWrapper = document.getElementById("empty-lot-pipes-wrapper");
+    const spotlightBadgeText = document.getElementById("empty-lot-spotlight-badge-text");
+
+    const selectEmptyLotCharacter = (charId) => {
+      const charData = EMPTY_LOT_GANG.find(c => c.id === charId);
+      if (!charData) return;
+
+      // Update active state on cards and dim others
+      if (gridContainer) gridContainer.classList.add("has-active-poke");
+      cards.forEach((c) => {
+        c.classList.toggle("active-poke", c.getAttribute("data-char") === charId);
+      });
+
+      // Apply spotlight and dim other kids on the concrete pipes photo
+      if (pipesWrapper && charData.spotlight) {
+        pipesWrapper.style.setProperty("--spot-x", charData.spotlight.x);
+        pipesWrapper.style.setProperty("--spot-y", charData.spotlight.y);
+        pipesWrapper.style.setProperty("--spot-rx", charData.spotlight.rx);
+        pipesWrapper.style.setProperty("--spot-ry", charData.spotlight.ry);
+        pipesWrapper.classList.add("has-spotlight");
+      }
+
+      if (spotlightBadgeText && charData.spotlight) {
+        spotlightBadgeText.textContent = charData.spotlight.badge;
+      }
+
+      if (featureSpeech) {
+        featureSpeech.innerHTML = `<strong>${charData.name}:</strong> "${charData.popText}"`;
+        featureSpeech.classList.add("show");
+      }
+
+      const activeCard = Array.from(cards).find(c => c.getAttribute("data-char") === charId);
+      if (activeCard) {
+        activeCard.classList.remove("poked");
+        void activeCard.offsetWidth; // trigger reflow
+        activeCard.classList.add("poked");
+        this.spawnDoodleParticles(charData.doodle, activeCard);
+      }
+
+      if (charId === "gian") {
+        if (window.soundEngine) window.soundEngine.playGianSinging();
+        if (gridContainer) {
+          gridContainer.classList.add("gian-earthquake");
+          setTimeout(() => gridContainer.classList.remove("gian-earthquake"), 1200);
+        }
+      } else {
+        if (window.soundEngine) window.soundEngine.playPoke();
+      }
+    };
 
     cards.forEach((card) => {
       card.addEventListener("click", () => {
-        const charId = card.getAttribute("data-char");
-        const charData = EMPTY_LOT_GANG.find(c => c.id === charId);
-        if (!charData) return;
-
-        // Card bounce animation
-        card.classList.remove("poked");
-        void card.offsetWidth; // trigger reflow
-        card.classList.add("poked");
-
-        if (featureSpeech) {
-          featureSpeech.innerHTML = `<strong>${charData.name}:</strong> "${charData.popText}"`;
-          featureSpeech.classList.add("show");
-        }
-
-        if (charId === "gian") {
-          if (window.soundEngine) window.soundEngine.playGianSinging();
-          if (gridContainer) {
-            gridContainer.classList.add("gian-earthquake");
-            setTimeout(() => gridContainer.classList.remove("gian-earthquake"), 1200);
-          }
-        } else {
-          if (window.soundEngine) window.soundEngine.playPoke();
-        }
-
-        this.spawnDoodleParticles(charData.doodle, card);
+        selectEmptyLotCharacter(card.getAttribute("data-char"));
       });
     });
+
+    const hotspots = document.querySelectorAll(".empty-lot-hotspot");
+    hotspots.forEach((hs) => {
+      hs.addEventListener("click", () => {
+        selectEmptyLotCharacter(hs.getAttribute("data-char"));
+      });
+    });
+
+    // Default spotlight on Shizuka
+    selectEmptyLotCharacter("shizuka");
   }
 
   // --- C. Neighborhood 3D Flip Polaroids ---

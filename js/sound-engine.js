@@ -532,11 +532,32 @@ class AnimeSoundEngine {
     osc.stop(t + 0.85);
   }
 
-  // --- 14. Character Voice Synthesis (Greetings & Anime Lines) ---
+  // --- 14. Character Voice System (Real Audio + Procedural Fallback) ---
+  playRealAudio(charId) {
+    if (this.isMuted) return Promise.reject("muted");
+    return new Promise((resolve, reject) => {
+      const audio = new Audio(`assets/audio/${charId}.mp3`);
+      audio.volume = 0.95;
+      audio.onended = () => resolve(true);
+      audio.onerror = () => reject("audio_not_found");
+      const playPromise = audio.play();
+      if (playPromise !== undefined) {
+        playPromise.then(() => resolve(true)).catch(reject);
+      }
+    });
+  }
+
   speakCharacter(charId) {
     if (this.isMuted) return;
     this.ensureContext();
 
+    // Try real audio recording first (e.g. assets/audio/doraemon.mp3)
+    this.playRealAudio(charId).catch(() => {
+      this.synthesizeCharacterVoice(charId);
+    });
+  }
+
+  synthesizeCharacterVoice(charId) {
     const SCRIPTS = {
       shizuka: {
         ja: "こんにちは、のび太さん！",
